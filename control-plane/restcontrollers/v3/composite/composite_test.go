@@ -12,7 +12,9 @@ import (
 	mock_dao "github.com/netcracker/qubership-core-control-plane/control-plane/v2/test/mock/dao"
 	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util/msaddr"
 	"github.com/netcracker/qubership-core-lib-go-error-handling/v3/tmf"
+	security2 "github.com/netcracker/qubership-core-lib-go-fiber-server-utils/v2/security"
 	"github.com/netcracker/qubership-core-lib-go/v3/configloader"
+	"github.com/netcracker/qubership-core-lib-go/v3/serviceloader"
 	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"net/http"
@@ -133,6 +135,7 @@ func TestHandleGetCompositeStructure_shouldReturnError(t *testing.T) {
 }
 
 func TestMain(m *testing.M) {
+	serviceloader.Register(1, &security2.DummyFiberServerSecurityMiddleware{})
 	configloader.Init(configloader.EnvPropertySource())
 	os.Exit(m.Run())
 }

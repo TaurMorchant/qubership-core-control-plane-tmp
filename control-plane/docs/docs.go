@@ -5,13 +5,11 @@ import "github.com/swaggo/swag"
 
 const docTemplate = `{
     "schemes": {{ marshal .Schemes }},
-    "produces": [
-        "application/json"
-    ],
     "swagger": "2.0",
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
+        "contact": {},
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -3669,7 +3667,7 @@ const docTemplate = `{
                 "tlsConfigName": {
                     "$ref": "#/definitions/domain.TlsConfig"
                 },
-                "tlsid": {
+                "tlsId": {
                     "type": "integer"
                 },
                 "type": {
@@ -6183,38 +6181,17 @@ const docTemplate = `{
                 "error": {}
             }
         }
-    },
-    "securityDefinitions": {
-        "ApiKeyAuth": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
-        }
-    },
-    "tags": [
-        {
-            "description": "routing operations for v1 apis",
-            "name": "routes-controller-v1"
-        },
-        {
-            "description": "routing operations for v2 apis",
-            "name": "control-plane-v2"
-        },
-        {
-            "description": "routing operations for v3 apis",
-            "name": "control-plane-v3"
-        }
-    ]
+    }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "2.0",
+	Version:          "",
 	Host:             "",
 	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "Control Plane API",
-	Description:      "Control-plane is a central microservice of Service Mesh which is responsible for all the gateways configuration. For more information, visit our Documentation(https://github.com/Netcracker/qubership-core-control-plane/tree/main/README.md).",
+	Title:            "",
+	Description:      "",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

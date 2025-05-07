@@ -1,12 +1,7 @@
 {
-    "produces": [
-        "application/json"
-    ],
     "swagger": "2.0",
     "info": {
-        "description": "Control-plane is a central microservice of Service Mesh which is responsible for all the gateways configuration. For more information, visit our Documentation(https://github.com/Netcracker/qubership-core-control-plane/tree/main/README.md).",
-        "title": "Control Plane API",
-        "version": "2.0"
+        "contact": {}
     },
     "paths": {
         "/api/v1/routes/clusters": {
@@ -3661,7 +3656,7 @@
                 "tlsConfigName": {
                     "$ref": "#/definitions/domain.TlsConfig"
                 },
-                "tlsid": {
+                "tlsId": {
                     "type": "integer"
                 },
                 "type": {
@@ -6175,26 +6170,5 @@
                 "error": {}
             }
         }
-    },
-    "securityDefinitions": {
-        "ApiKeyAuth": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
-        }
-    },
-    "tags": [
-        {
-            "description": "routing operations for v1 apis",
-            "name": "routes-controller-v1"
-        },
-        {
-            "description": "routing operations for v2 apis",
-            "name": "control-plane-v2"
-        },
-        {
-            "description": "routing operations for v3 apis",
-            "name": "control-plane-v3"
-        }
-    ]
+    }
 }

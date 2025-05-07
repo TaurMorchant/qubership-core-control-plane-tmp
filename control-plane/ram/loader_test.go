@@ -1,11 +1,9 @@
-package ram_test
+package ram
 
 import (
 	"fmt"
 	"github.com/golang/mock/gomock"
 	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
-	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/ram"
-	mock_ram "github.com/netcracker/qubership-core-control-plane/control-plane/v2/ram/mock"
 	test_mock_constancy "github.com/netcracker/qubership-core-control-plane/control-plane/v2/test/mock/constancy"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -45,10 +43,10 @@ func Test_StorageLoader_ClearAndLoad(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 	storage := test_mock_constancy.NewMockStorage(ctrl)
-	ramStorage := mock_ram.NewMockRamStorage(ctrl)
-	txn := mock_ram.NewMockTxn(ctrl)
+	ramStorage := NewMockRamStorage(ctrl)
+	txn := NewMockTxn(ctrl)
 
-	loader := ram.StorageLoader{PersistentStorage: storage}
+	loader := StorageLoader{PersistentStorage: storage}
 
 	storage.EXPECT().FindAllTlsConfigs().Return([]*domain.TlsConfig{}, nil)
 	storage.EXPECT().FindAllNodeGroups().Return([]*domain.NodeGroup{}, nil)
@@ -95,13 +93,13 @@ func Test_StorageLoader_ClearAndLoad_ErrorOnLoad(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 	storage := test_mock_constancy.NewMockStorage(ctrl)
-	ramStorage := mock_ram.NewMockRamStorage(ctrl)
-	txn := mock_ram.NewMockTxn(ctrl)
+	ramStorage := NewMockRamStorage(ctrl)
+	txn := NewMockTxn(ctrl)
 
-	loader := ram.StorageLoader{PersistentStorage: storage}
+	loader := StorageLoader{PersistentStorage: storage}
 
-	errorMessage := "error during load"
-	storage.EXPECT().FindAllTcpKeepalives().Return(nil, fmt.Errorf(errorMessage))
+	errorMessage := fmt.Errorf("error during load")
+	storage.EXPECT().FindAllTcpKeepalives().Return(nil, errorMessage)
 
 	ramStorage.EXPECT().WriteTx().Return(txn)
 	txn.EXPECT().Abort()
@@ -112,5 +110,5 @@ func Test_StorageLoader_ClearAndLoad_ErrorOnLoad(t *testing.T) {
 
 	err := loader.ClearAndLoad(ramStorage)
 	assert.Error(t, err)
-	assert.Equal(t, errorMessage, err.Error())
+	assert.Equal(t, errorMessage, err)
 }

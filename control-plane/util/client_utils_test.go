@@ -12,6 +12,8 @@ import (
 	"errors"
 	"github.com/netcracker/qubership-core-lib-go/v3/configloader"
 	"github.com/netcracker/qubership-core-lib-go/v3/logging"
+	"github.com/netcracker/qubership-core-lib-go/v3/security"
+	"github.com/netcracker/qubership-core-lib-go/v3/serviceloader"
 	"github.com/stretchr/testify/assert"
 	"github.com/valyala/fasthttp"
 	"math/big"
@@ -21,6 +23,8 @@ import (
 )
 
 func TestMain(m *testing.M) {
+	serviceloader.Register(1, &security.DummyToken{})
+
 	configloader.Init()
 	os.Exit(m.Run())
 }

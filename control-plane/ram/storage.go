@@ -18,7 +18,7 @@ func init() {
 	log = logging.GetLogger("ram")
 }
 
-//go:generate mockgen -source=storage.go -destination=./mock/stub_storage.go -package=mock_ram -imports memdb=github.com/hashicorp/go-memdb
+//go:generate mockgen -source=storage.go -destination=./storage_mock.go -package=ram -imports memdb=github.com/hashicorp/go-memdb
 type RamStorage interface {
 	data.RestorableStorage
 	WriteTx() Txn

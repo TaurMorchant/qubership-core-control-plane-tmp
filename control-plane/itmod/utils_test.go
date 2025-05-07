@@ -21,11 +21,14 @@ import (
 	v22 "github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/route/v2"
 	srv3 "github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/route/v3"
 	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/routingmode"
+	security2 "github.com/netcracker/qubership-core-lib-go-fiber-server-utils/v2/security"
 	"github.com/netcracker/qubership-core-lib-go/v3/configloader"
+	"github.com/netcracker/qubership-core-lib-go/v3/serviceloader"
 	"net/http"
 	"net/url"
 	"os"
 	"strings"
+	"testing"
 )
 
 type TestEnvironment struct {
@@ -35,6 +38,11 @@ type TestEnvironment struct {
 	RouteControllerV2     *v2.RoutesController
 	RouteControllerV3     *v3.RoutingConfigController
 	BlueGreenControllerV2 *v2.BlueGreenController
+}
+
+func TestMain(m *testing.M) {
+	serviceloader.Register(1, &security2.DummyFiberServerSecurityMiddleware{})
+	os.Exit(m.Run())
 }
 
 func InitCPTestEnvironment() TestEnvironment {

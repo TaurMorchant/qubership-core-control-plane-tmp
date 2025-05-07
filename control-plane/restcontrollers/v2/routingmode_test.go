@@ -10,7 +10,9 @@ import (
 	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/routingmode"
 	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util/msaddr"
 	fiberserver "github.com/netcracker/qubership-core-lib-go-fiber-server-utils/v2"
+	security2 "github.com/netcracker/qubership-core-lib-go-fiber-server-utils/v2/security"
 	"github.com/netcracker/qubership-core-lib-go/v3/configloader"
+	"github.com/netcracker/qubership-core-lib-go/v3/serviceloader"
 	"io"
 	"net/http"
 	"os"
@@ -23,6 +25,8 @@ var (
 )
 
 func TestMain(m *testing.M) {
+	serviceloader.Register(1, &security2.DummyFiberServerSecurityMiddleware{})
+
 	inMemStorage := ram.NewStorage()
 	genericDao := dao.NewInMemDao(inMemStorage, &IdGeneratorMock{}, nil)
 	service = routingmode.NewService(genericDao, "v1")

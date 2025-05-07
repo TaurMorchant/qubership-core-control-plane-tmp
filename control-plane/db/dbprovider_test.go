@@ -4,10 +4,17 @@ import (
 	"context"
 	dbaasbase "github.com/netcracker/qubership-core-lib-go-dbaas-base-client/v3"
 	"github.com/netcracker/qubership-core-lib-go/v3/configloader"
+	"github.com/netcracker/qubership-core-lib-go/v3/security"
+	"github.com/netcracker/qubership-core-lib-go/v3/serviceloader"
 	"github.com/stretchr/testify/assert"
 	"os"
 	"testing"
 )
+
+func TestMain(m *testing.M) {
+	serviceloader.Register(1, &security.DummyToken{})
+	os.Exit(m.Run())
+}
 
 // Test error cases
 // Required to suppress coverage requirement
