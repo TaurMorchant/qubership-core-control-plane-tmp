@@ -10,44 +10,17 @@ metadata:
         app.kubernetes.io/name: '{{ .Values.SERVICE_NAME }}'
         app.kubernetes.io/part-of: 'Cloud-Core'
         app.kubernetes.io/managed-by: 'saasDeployer'
-        mesh.qubership.org/gateway-name: 'static-core-gateway'
         deployment.qubership.org/sessionId: '{{ .Values.DEPLOYMENT_SESSION_ID }}'
 spec:
     ports:
     -   name: web
         port: 8080
         targetPort: 8080
-    -   name: tls
-        port: 8443
-        targetPort: 8443
-    selector:
-        name: 'static-core-gateway'
-    {{ if  eq .Values.K8S_SERVICE_TYPE "HEADLESS" }}
-    clusterIP: None
-    {{ end }}
----
-kind: Service
-apiVersion: v1
-metadata:
-    name: '{{ .Values.SERVICE_NAME }}-internal'
-    labels:
-        name: '{{ .Values.SERVICE_NAME }}'
-        app.kubernetes.io/name: '{{ .Values.SERVICE_NAME }}'
-        app.kubernetes.io/part-of: 'Cloud-Core'
-        app.kubernetes.io/managed-by: 'saasDeployer'
-        deployment.qubership.org/sessionId: '{{ .Values.DEPLOYMENT_SESSION_ID }}'
-    annotations:
-      qubership.cloud/start.stage: '1'
-spec:
-    ports:
-    -   name: web
-        port: {{ if .Values.INTERNAL_TLS_ENABLED }} 8443 {{ else }} 8080 {{ end }}
-        targetPort: {{ if .Values.INTERNAL_TLS_ENABLED }} 8443 {{ else }} 8080 {{ end }}
     -   name: grpc
         port: 15010
         targetPort: 15010
     selector:
         name: '{{ .Values.SERVICE_NAME }}'
-  {{ if  eq .Values.K8S_SERVICE_TYPE "HEADLESS" }}
+    {{ if  eq .Values.K8S_SERVICE_TYPE "HEADLESS" }}
     clusterIP: None
-  {{ end }}
+    {{ end }}

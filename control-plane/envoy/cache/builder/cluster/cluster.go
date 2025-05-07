@@ -295,9 +295,6 @@ func buildMatchTypedSubjectAltNames(cluster *domain.Cluster) []*tlsV3.SubjectAlt
 	var dnsNames []string
 	for _, domainEndpoint := range cluster.Endpoints {
 		endpointAddr := domainEndpoint.Address
-		if tlsmode.IsStaticCoreService(endpointAddr) {
-			endpointAddr += "-internal"
-		}
 		dnsNames = append(dnsNames, endpointAddr)
 	}
 
@@ -531,9 +528,6 @@ func createLbEndpoints(clusterName string, endpoints []*domain.Endpoint) []*endp
 			continue
 		}
 		endpointAddr := clusterEndpoint.Address
-		if tlsmode.IsStaticCoreService(endpointAddr) {
-			endpointAddr += "-internal"
-		}
 
 		if !strings.Contains(endpointAddr, msaddr.LocalDevNamespacePostfix) {
 			namespace := msaddr.CurrentNamespaceAsString()

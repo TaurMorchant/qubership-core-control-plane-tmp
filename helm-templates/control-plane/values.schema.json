@@ -50,7 +50,7 @@
       "EXECUTION_MODE": "active",
       "DISABLE_IP_ROUTE_REGISTRATION": true,
       "DNS_LOOKUP_FAMILY": "V6_PREFERRED",
-      "K8S_SERVICE_TYPE": "HEADLESS"
+      "K8S_SERVICE_TYPE": "CLUSTER_IP"
     }
   ],
   "definitions": {
@@ -591,7 +591,7 @@
       "type": "string",
       "title": "The K8S_SERVICE_TYPE schema",
       "description": "K8S service type",
-      "default": "HEADLESS",
+      "default": "CLUSTER_IP",
       "internal": true
     },
     "CONSUL_ENABLED": {

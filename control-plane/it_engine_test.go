@@ -347,7 +347,7 @@ func CreateGatewayContainer(serviceName string) *GatewayContainer {
 			"POD_HOSTNAME=localhost",
 			"GW_MEMORY_LIMIT=100Mi"},
 		ports:      []nat.Port{"8080", "9901"},
-		extraHosts: []string{"control-plane-internal:" + hostIP, "control-plane:" + hostIP},
+		extraHosts: []string{"control-plane:" + hostIP, "control-plane:" + hostIP},
 		readyCheck: healthCheck.CheckHealth,
 	})
 

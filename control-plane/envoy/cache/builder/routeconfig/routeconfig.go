@@ -12,7 +12,6 @@ import (
 	"github.com/netcracker/qubership-core-control-plane/domain"
 	"github.com/netcracker/qubership-core-control-plane/envoy/cache/builder/cluster"
 	"github.com/netcracker/qubership-core-control-plane/envoy/cache/builder/common"
-	"github.com/netcracker/qubership-core-control-plane/tlsmode"
 	"github.com/netcracker/qubership-core-control-plane/util"
 	"github.com/netcracker/qubership-core-lib-go/v3/logging"
 	"google.golang.org/protobuf/types/known/durationpb"
@@ -236,8 +235,7 @@ func (builder *RouteBuilderImpl) BuildRoute(route *domain.Route) (*eroute.Route,
 					}
 				}
 				if route.HostRewrite != "" {
-					hostRewrite := tlsmode.TransformHostRewrite(route.HostRewrite)
-					envoyRoute.GetRoute().HostRewriteSpecifier = &eroute.RouteAction_HostRewriteLiteral{HostRewriteLiteral: hostRewrite}
+					envoyRoute.GetRoute().HostRewriteSpecifier = &eroute.RouteAction_HostRewriteLiteral{HostRewriteLiteral: route.HostRewrite}
 				}
 			}
 		}

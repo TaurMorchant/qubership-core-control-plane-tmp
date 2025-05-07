@@ -115,50 +115,6 @@ func SelectByMode[T any](nonTlsValue, tlsValue T) T {
 	}
 }
 
-// IsStaticCoreService indicates if service is hidden behind static-core-gateway,
-// so its hostname needs to be modified in route configuration.
-// Accepts endpoint address as an argument.
-func IsStaticCoreService(hostname string) bool {
-	_, found := staticCoreServices[hostname]
-	return found
-}
-
-// AdaptHostname adapts new cloud-core microservices hostnames (e.g. control-plane-internal) to the old ones (e.g. control-plane),
-// to avoid endpoint duplicates. For non-core services AdaptHostname returns hostname without changes.
-func AdaptHostname(hostname string) string {
-	if strings.HasSuffix(hostname, "-internal") {
-		hostnameWithoutSuffix := hostname[:len(hostname)-internalSuffixLen]
-		if IsStaticCoreService(hostnameWithoutSuffix) {
-			return hostnameWithoutSuffix
-		}
-	}
-	return hostname
-}
-
-// TransformHostRewrite transforms domain.Route#HostRewrite field for services hidden behind static-core-gateway,
-// since envoy cache builder overrides upstream host for these services to avoid extra hops.
-//
-// For all the other services this is no-op.
-func TransformHostRewrite(address string) string {
-	if address == "" {
-		return ""
-	}
-	parts := strings.Split(address, ":")
-	if len(parts) == 1 { // address contains only hostname
-		if IsStaticCoreService(address) {
-			return address + "-internal"
-		} else {
-			return address
-		}
-	} else { // address contains both hostname and port
-		if IsStaticCoreService(parts[0]) {
-			return fmt.Sprintf("%s-internal:%s", parts[0], parts[1])
-		} else {
-			return address
-		}
-	}
-}
-
 func (m Mode) String() string {
 	switch m {
 	case Preferred:

@@ -113,28 +113,37 @@ func TestDeleteRoutesByCondition(t *testing.T) {
 
 	request := getCorrectRequest()
 
+	RegisterRouteCheck(t, daoMock, regSrv, "tlsConfigName", request)
+}
+
+func TestRegisterRoutesWithExistedClusterAndTls(t *testing.T) {
+	regSrv, daoMock, _ := createServiceWithMode(t)
+	request := getCorrectRequest()
+
+	tlsConfigToApply := &domain.TlsConfig{
+		Name:    "tlsConfigName",
+		Enabled: true,
+	}
+
 	_, err := daoMock.WithWTx(func(dao dao.Repository) error {
-		return regSrv.RegisterRoutes(context.Background(), dao, request)
+		return dao.SaveTlsConfig(tlsConfigToApply)
 	})
 	assert.Nil(t, err)
 
-	registrationServiceContext := regSrv.WithContext(context.Background(), daoMock)
+	tlsSaved, err := daoMock.FindTlsConfigByName(tlsConfigToApply.Name)
 
-	vHostId := request.RouteConfigurations[0].VirtualHosts[0].Routes[0].VirtualHostId
-	condition := func(route domain.Route) bool {
-		return false
+	clusterToApply := &domain.Cluster{
+		Name:    "ClusterName1",
+		Version: 0,
+		TLSId:   tlsSaved.Id,
 	}
 
-	routes, err := registrationServiceContext.DeleteRoutesByCondition(vHostId, condition)
+	_, err = daoMock.WithWTx(func(dao dao.Repository) error {
+		return dao.SaveCluster(clusterToApply)
+	})
 	assert.Nil(t, err)
-	assert.Equal(t, 0, len(routes))
 
-	condition = func(route domain.Route) bool {
-		return true
-	}
-	routes, err = registrationServiceContext.DeleteRoutesByCondition(vHostId, condition)
-	assert.Nil(t, err)
-	assert.Equal(t, len(request.RouteConfigurations[0].VirtualHosts[0].Routes), len(routes))
+	RegisterRouteCheck(t, daoMock, regSrv, tlsConfigToApply.Name, request)
 }
 
 func TestValidateRequest_shouldReturnFalse_shenRequestIsNotValid(t *testing.T) {
@@ -188,36 +197,6 @@ func TestRegisterRoutesSaveClusterWithDefaultTlSButItHasItInDatabase(t *testing.
 	request.ClusterTlsConfig = map[string]string{
 		"ClusterName1": "ClusterName1-tls",
 	}
-
-	tlsConfigToApply := &domain.TlsConfig{
-		Name:    "tlsConfigName",
-		Enabled: true,
-	}
-
-	_, err := daoMock.WithWTx(func(dao dao.Repository) error {
-		return dao.SaveTlsConfig(tlsConfigToApply)
-	})
-	assert.Nil(t, err)
-
-	tlsSaved, err := daoMock.FindTlsConfigByName(tlsConfigToApply.Name)
-
-	clusterToApply := &domain.Cluster{
-		Name:    "ClusterName1",
-		Version: 0,
-		TLSId:   tlsSaved.Id,
-	}
-
-	_, err = daoMock.WithWTx(func(dao dao.Repository) error {
-		return dao.SaveCluster(clusterToApply)
-	})
-	assert.Nil(t, err)
-
-	RegisterRouteCheck(t, daoMock, regSrv, tlsConfigToApply.Name, request)
-}
-
-func TestRegisterRoutesWithExistedClusterAndTls(t *testing.T) {
-	regSrv, daoMock, _ := createServiceWithMode(t)
-	request := getCorrectRequest()
 
 	tlsConfigToApply := &domain.TlsConfig{
 		Name:    "tlsConfigName",

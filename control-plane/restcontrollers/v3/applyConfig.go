@@ -103,7 +103,7 @@ func applyConfigs(ctx context.Context, configs []configresources.ConfigResource,
 	for _, config := range configs {
 		handlingResult, err := configresources.HandleConfigResource(ctx, config)
 		if err != nil {
-			if err == configresources.ErrIsOverridden {
+			if err.ErrCodeError.GetDetail() == configresources.ErrIsOverridden.Error() {
 				results[*idx] = NewApplyResult(config, http.StatusOK, nil, "Configuration wasn't applied because flag \"overridden\" is set to true")
 				*idx++
 				continue

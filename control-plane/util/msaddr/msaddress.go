@@ -1,7 +1,6 @@
 package msaddr
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/tlsmode"
 	"github.com/netcracker/qubership-core-lib-go/v3/logging"
 	"strconv"
 	"strings"
@@ -22,7 +21,6 @@ func NewMicroserviceAddress(msUrl string, namespace string) *MicroserviceAddress
 
 	var portStr string
 	this.Proto, this.Host, portStr = this.splitUrl(msUrl)
-	this.Host = tlsmode.AdaptHostname(this.Host)
 	portInt, err := strconv.Atoi(portStr)
 	if err != nil {
 		logger.Panicf("Failed to convert port %v to int: %v", portStr, err)

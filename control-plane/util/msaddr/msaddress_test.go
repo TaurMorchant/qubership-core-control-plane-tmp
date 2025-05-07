@@ -16,13 +16,7 @@ func TestGetTargetHost(t *testing.T) {
 
 func TestCoreInternalHost(t *testing.T) {
 	assert := asrt.New(t)
-	msAddress := NewMicroserviceAddress("http://identity-provider-internal:8080", "some-namespace")
-	assert.Equal("identity-provider.some-namespace", msAddress.GetNamespacedMicroserviceHost())
-	assert.Equal("identity-provider", msAddress.GetMicroserviceName())
-	assert.Equal("http", msAddress.GetProto())
-	assert.Equal(int32(8080), msAddress.GetPort())
-
-	msAddress = NewMicroserviceAddress("http://identity-provider:8080", "some-namespace")
+	msAddress := NewMicroserviceAddress("http://identity-provider:8080", "some-namespace")
 	assert.Equal("identity-provider.some-namespace", msAddress.GetNamespacedMicroserviceHost())
 	assert.Equal("identity-provider", msAddress.GetMicroserviceName())
 	assert.Equal("http", msAddress.GetProto())

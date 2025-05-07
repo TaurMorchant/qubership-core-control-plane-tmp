@@ -63,7 +63,7 @@ func TestBuildMatchTypedSubjectAltNames(t *testing.T) {
 				},
 			},
 			enableTls:     "true",
-			expectedNames: []string{"control-plane-internal", "test-service"},
+			expectedNames: []string{"control-plane", "test-service"},
 		},
 		{
 			name: "withoutTls",
