@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"github.com/go-errors/errors"
-	"github.com/netcracker/qubership-core-control-plane/services/route/routekey"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/route/routekey"
 	"github.com/uptrace/bun"
 )
 

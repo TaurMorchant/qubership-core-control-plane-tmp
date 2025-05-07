@@ -1,7 +1,7 @@
 package entity
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
 )
 
 func (srv *Service) DeleteVirtualServiceByNodeGroupAndName(dao dao.Repository, nodeGroup, virtualServiceName string) error {

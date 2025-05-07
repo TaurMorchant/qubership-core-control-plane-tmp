@@ -2,8 +2,8 @@ package tm
 
 import (
 	"encoding/json"
-	"github.com/netcracker/qubership-core-control-plane/services/cache"
-	"github.com/netcracker/qubership-core-control-plane/services/tm/entity"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/cache"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/tm/entity"
 	go_stomp_websocket "github.com/netcracker/qubership-core-lib-go-stomp-websocket/v3"
 )
 

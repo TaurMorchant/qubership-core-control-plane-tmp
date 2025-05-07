@@ -2,7 +2,7 @@ package tm
 
 import (
 	"github.com/gorilla/websocket"
-	"github.com/netcracker/qubership-core-control-plane/util"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util"
 	"net/http"
 	"net/url"
 )

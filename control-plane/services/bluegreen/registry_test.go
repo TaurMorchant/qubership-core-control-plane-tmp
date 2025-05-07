@@ -1,13 +1,13 @@
 package bluegreen
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/event/bus"
-	"github.com/netcracker/qubership-core-control-plane/event/events"
-	"github.com/netcracker/qubership-core-control-plane/restcontrollers/dto"
-	"github.com/netcracker/qubership-core-control-plane/util"
-	"github.com/netcracker/qubership-core-control-plane/util/msaddr"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/event/bus"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/event/events"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/dto"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util/msaddr"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

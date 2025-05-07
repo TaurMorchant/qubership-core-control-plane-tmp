@@ -3,7 +3,7 @@ package clustering
 import (
 	"database/sql"
 	"fmt"
-	"github.com/netcracker/qubership-core-control-plane/db"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/db"
 	"github.com/stretchr/testify/assert"
 	"github.com/uptrace/bun"
 	"testing"

@@ -1,8 +1,8 @@
 package listener
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache"
-	"github.com/netcracker/qubership-core-control-plane/event/events"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/event/events"
 )
 
 type ChangeEventListener struct {

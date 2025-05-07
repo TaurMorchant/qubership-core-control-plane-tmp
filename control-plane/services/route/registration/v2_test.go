@@ -2,8 +2,8 @@ package registration
 
 import (
 	"context"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/restcontrollers/dto"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/dto"
 	"reflect"
 	"testing"
 )

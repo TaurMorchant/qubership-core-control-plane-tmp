@@ -2,11 +2,11 @@ package event
 
 import (
 	"github.com/hashicorp/go-memdb"
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache/action"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache/builder"
-	"github.com/netcracker/qubership-core-control-plane/event/events"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache/action"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache/builder"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/event/events"
 	"github.com/netcracker/qubership-core-lib-go/v3/logging"
 )
 

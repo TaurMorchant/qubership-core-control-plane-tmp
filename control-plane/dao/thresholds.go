@@ -1,6 +1,6 @@
 package dao
 
-import "github.com/netcracker/qubership-core-control-plane/domain"
+import "github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
 
 func (d *InMemRepo) SaveThreshold(threshold *domain.Threshold) error {
 	txCtx := d.getTxCtx(true)

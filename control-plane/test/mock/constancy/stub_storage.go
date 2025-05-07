@@ -6,8 +6,8 @@ package mock_constancy
 
 import (
 	context "context"
-	clustering "github.com/netcracker/qubership-core-control-plane/clustering"
-	domain "github.com/netcracker/qubership-core-control-plane/domain"
+	clustering "github.com/netcracker/qubership-core-control-plane/control-plane/v2/clustering"
+	domain "github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"

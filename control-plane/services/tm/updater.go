@@ -1,9 +1,9 @@
 package tm
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	envoy "github.com/netcracker/qubership-core-control-plane/envoy/cache"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	envoy "github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache"
 	"sort"
 	"time"
 )

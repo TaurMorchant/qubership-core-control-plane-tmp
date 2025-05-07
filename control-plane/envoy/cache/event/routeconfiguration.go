@@ -2,8 +2,8 @@ package event
 
 import (
 	"github.com/hashicorp/go-memdb"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache/action"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache/action"
 )
 
 func (parser *changeEventParserImpl) processRouteConfigurationChanges(actions action.ActionsMap, entityVersions map[string]string, nodeGroup string, changes []memdb.Change) {

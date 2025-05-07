@@ -6,12 +6,12 @@ import (
 	"github.com/envoyproxy/go-control-plane/pkg/cache/types"
 	"github.com/envoyproxy/go-control-plane/pkg/cache/v3"
 	"github.com/envoyproxy/go-control-plane/pkg/resource/v3"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache/builder"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache/builder/cluster"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache/builder/common"
-	"github.com/netcracker/qubership-core-control-plane/tlsmode"
-	"github.com/netcracker/qubership-core-control-plane/util"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache/builder"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache/builder/cluster"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache/builder/common"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/tlsmode"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util"
 	"github.com/netcracker/qubership-core-lib-go/v3/logging"
 )
 

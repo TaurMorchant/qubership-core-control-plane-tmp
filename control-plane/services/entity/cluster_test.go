@@ -2,8 +2,8 @@ package entity
 
 import (
 	"github.com/google/uuid"
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

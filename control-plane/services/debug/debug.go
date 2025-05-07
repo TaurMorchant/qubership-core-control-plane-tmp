@@ -1,9 +1,9 @@
 package debug
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/composite"
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/data"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/composite"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/data"
 )
 
 type Service struct {

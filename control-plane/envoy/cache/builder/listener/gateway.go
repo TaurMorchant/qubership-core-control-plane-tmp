@@ -10,7 +10,7 @@ import (
 	hcm "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
 	"github.com/envoyproxy/go-control-plane/pkg/wellknown"
 	"github.com/golang/protobuf/ptypes"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache/builder/common"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache/builder/common"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 

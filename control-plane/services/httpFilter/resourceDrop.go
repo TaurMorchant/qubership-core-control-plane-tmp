@@ -2,9 +2,9 @@ package httpFilter
 
 import (
 	"context"
-	"github.com/netcracker/qubership-core-control-plane/restcontrollers/dto"
-	cfgres "github.com/netcracker/qubership-core-control-plane/services/configresources"
-	"github.com/netcracker/qubership-core-control-plane/services/httpFilter/extAuthz"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/dto"
+	cfgres "github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/configresources"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/httpFilter/extAuthz"
 	"reflect"
 )
 

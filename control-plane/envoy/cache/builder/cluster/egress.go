@@ -1,8 +1,8 @@
 package cluster
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache/builder/common"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache/builder/common"
 	"os"
 	"strings"
 

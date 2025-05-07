@@ -3,7 +3,7 @@ package ui
 import (
 	"context"
 	"github.com/go-errors/errors"
-	"github.com/netcracker/qubership-core-control-plane/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
 	asrt "github.com/stretchr/testify/assert"
 	"reflect"
 	"testing"

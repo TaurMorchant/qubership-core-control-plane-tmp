@@ -2,9 +2,9 @@ package v3
 
 import (
 	"fmt"
-	"github.com/netcracker/qubership-core-control-plane/data"
-	"github.com/netcracker/qubership-core-control-plane/restcontrollers/restutils"
-	"github.com/netcracker/qubership-core-control-plane/services/debug"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/data"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/restutils"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/debug"
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"

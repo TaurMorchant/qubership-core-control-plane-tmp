@@ -1,9 +1,9 @@
 package dao
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/services/cluster/clusterkey"
-	"github.com/netcracker/qubership-core-control-plane/util/msaddr"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/cluster/clusterkey"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util/msaddr"
 	error_util "github.com/pkg/errors"
 )
 

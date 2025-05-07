@@ -2,12 +2,12 @@ package cache
 
 import (
 	v3cache "github.com/envoyproxy/go-control-plane/pkg/cache/v3"
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache/builder"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache/builder/common"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache/builder/listener"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache/builder/routeconfig"
-	"github.com/netcracker/qubership-core-control-plane/services/entity"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache/builder"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache/builder/common"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache/builder/listener"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache/builder/routeconfig"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/entity"
 )
 
 const (

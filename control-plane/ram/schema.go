@@ -3,7 +3,7 @@ package ram
 import (
 	"fmt"
 	"github.com/hashicorp/go-memdb"
-	"github.com/netcracker/qubership-core-control-plane/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
 	"unicode"
 )
 

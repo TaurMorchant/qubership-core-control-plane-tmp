@@ -3,12 +3,12 @@ package registration
 import (
 	"context"
 	"fmt"
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/restcontrollers/dto"
-	"github.com/netcracker/qubership-core-control-plane/services/cluster/clusterkey"
-	"github.com/netcracker/qubership-core-control-plane/services/route/creator"
-	"github.com/netcracker/qubership-core-control-plane/util/msaddr"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/dto"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/cluster/clusterkey"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/route/creator"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util/msaddr"
 )
 
 type V2RequestProcessor struct {

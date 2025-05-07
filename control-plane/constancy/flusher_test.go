@@ -3,8 +3,8 @@ package constancy
 import (
 	"errors"
 	"github.com/hashicorp/go-memdb"
-	"github.com/netcracker/qubership-core-control-plane/dr"
-	"github.com/netcracker/qubership-core-control-plane/errorcodes"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dr"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/errorcodes"
 	asrt "github.com/stretchr/testify/assert"
 	"os"
 	"testing"

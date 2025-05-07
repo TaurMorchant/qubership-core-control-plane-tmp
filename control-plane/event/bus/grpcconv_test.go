@@ -5,9 +5,9 @@ import (
 	"encoding/gob"
 	"github.com/hashicorp/go-memdb"
 	uuid3 "github.com/hashicorp/go-uuid"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/event/events"
-	"github.com/netcracker/qubership-core-control-plane/ram"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/event/events"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/ram"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

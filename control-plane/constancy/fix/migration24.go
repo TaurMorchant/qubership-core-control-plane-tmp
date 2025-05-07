@@ -3,7 +3,7 @@ package fix
 import (
 	"database/sql"
 	gerrors "github.com/go-errors/errors"
-	"github.com/netcracker/qubership-core-control-plane/constancy/migration"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/constancy/migration"
 	"github.com/uptrace/bun"
 )
 

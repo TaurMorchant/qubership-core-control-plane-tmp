@@ -2,7 +2,7 @@ package main
 
 import (
 	"bytes"
-	"github.com/netcracker/qubership-core-control-plane/lib"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/lib"
 	asrt "github.com/stretchr/testify/assert"
 	"net/http"
 	"testing"

@@ -5,9 +5,9 @@ import (
 	"encoding/gob"
 	"errors"
 	"github.com/golang/protobuf/ptypes"
-	"github.com/netcracker/qubership-core-control-plane/data"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/event/events"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/data"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/event/events"
 )
 
 var ErrUnsupportedEvent = errors.New("bus: unsupported event type")

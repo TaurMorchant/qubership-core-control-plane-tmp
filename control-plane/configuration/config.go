@@ -2,9 +2,9 @@ package config
 
 import (
 	"github.com/hashicorp/go-memdb"
-	"github.com/netcracker/qubership-core-control-plane/constancy"
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/ram"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/constancy"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/ram"
 	"sync"
 )
 

@@ -2,7 +2,6 @@ package db
 
 import (
 	"context"
-	_ "github.com/netcracker/qubership-core-control-plane/serviceregistrar"
 	dbaasbase "github.com/netcracker/qubership-core-lib-go-dbaas-base-client/v3"
 	"github.com/netcracker/qubership-core-lib-go/v3/configloader"
 	"github.com/stretchr/testify/assert"

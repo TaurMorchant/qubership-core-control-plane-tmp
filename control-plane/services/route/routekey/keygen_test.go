@@ -2,7 +2,7 @@ package routekey
 
 import (
 	"fmt"
-	"github.com/netcracker/qubership-core-control-plane/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
 	asrt "github.com/stretchr/testify/assert"
 	"math/rand"
 	"strconv"

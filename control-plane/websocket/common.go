@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/fasthttp/websocket"
 	"github.com/gofiber/fiber/v2"
-	"github.com/netcracker/qubership-core-control-plane/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
 	"github.com/netcracker/qubership-core-lib-go/v3/logging"
 	"github.com/valyala/fasthttp"
 	"time"

@@ -2,9 +2,9 @@ package routeconfig
 
 import (
 	"github.com/golang/mock/gomock"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/services/cluster/clusterkey"
-	"github.com/netcracker/qubership-core-control-plane/services/entity"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/cluster/clusterkey"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/entity"
 	"github.com/stretchr/testify/assert"
 	"reflect"
 	"testing"

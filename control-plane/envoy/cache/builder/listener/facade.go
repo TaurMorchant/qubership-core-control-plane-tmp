@@ -3,7 +3,7 @@ package listener
 import (
 	listener "github.com/envoyproxy/go-control-plane/envoy/config/listener/v3"
 	hcm "github.com/envoyproxy/go-control-plane/envoy/extensions/filters/network/http_connection_manager/v3"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache/builder/common"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache/builder/common"
 )
 
 const facadeDefaultHost = "facade"

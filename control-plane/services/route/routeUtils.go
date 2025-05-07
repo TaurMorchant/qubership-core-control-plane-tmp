@@ -2,9 +2,9 @@ package route
 
 import (
 	"fmt"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/services/configresources"
-	"github.com/netcracker/qubership-core-control-plane/util/msaddr"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/configresources"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util/msaddr"
 	"regexp"
 	"strings"
 )

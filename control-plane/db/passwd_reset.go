@@ -6,7 +6,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"github.com/netcracker/qubership-core-control-plane/tlsmode"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/tlsmode"
 	"strconv"
 	"strings"
 	"sync"

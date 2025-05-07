@@ -7,7 +7,7 @@ import (
 	image2 "github.com/docker/docker/api/types/image"
 	network2 "github.com/docker/docker/api/types/network"
 	"github.com/docker/go-connections/nat"
-	"github.com/netcracker/qubership-core-control-plane/util"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util"
 	"io"
 	"net"
 	"sync"

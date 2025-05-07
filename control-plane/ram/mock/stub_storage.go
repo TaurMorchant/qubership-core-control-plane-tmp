@@ -5,8 +5,8 @@
 package mock_ram
 
 import (
-	data "github.com/netcracker/qubership-core-control-plane/data"
-	ram "github.com/netcracker/qubership-core-control-plane/ram"
+	data "github.com/netcracker/qubership-core-control-plane/control-plane/v2/data"
+	ram "github.com/netcracker/qubership-core-control-plane/control-plane/v2/ram"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"

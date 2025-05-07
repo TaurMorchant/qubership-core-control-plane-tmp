@@ -1,8 +1,8 @@
 package domain
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/services/cluster/clusterkey"
-	"github.com/netcracker/qubership-core-control-plane/util/msaddr"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/cluster/clusterkey"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util/msaddr"
 )
 
 type MicroserviceKey struct {

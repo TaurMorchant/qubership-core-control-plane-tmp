@@ -2,8 +2,8 @@ package dao
 
 import (
 	"github.com/hashicorp/go-memdb"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/util/msaddr"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util/msaddr"
 )
 
 //go:generate mockgen -source=api.go -destination=../test/mock/dao/stub_api.go -package=mock_dao -imports memdb=github.com/hashicorp/go-memdb

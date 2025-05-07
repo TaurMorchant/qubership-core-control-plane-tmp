@@ -3,9 +3,9 @@ package proxy
 import (
 	"bytes"
 	"github.com/gofiber/fiber/v2"
-	"github.com/netcracker/qubership-core-control-plane/clustering"
-	"github.com/netcracker/qubership-core-control-plane/errorcodes"
-	"github.com/netcracker/qubership-core-control-plane/util"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/clustering"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/errorcodes"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util"
 	"github.com/netcracker/qubership-core-lib-go/v3/logging"
 	"github.com/valyala/fasthttp"
 	"net/http"

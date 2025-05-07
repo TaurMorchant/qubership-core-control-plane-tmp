@@ -2,11 +2,11 @@ package dto
 
 import (
 	"fmt"
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache"
-	"github.com/netcracker/qubership-core-control-plane/tlsmode"
-	"github.com/netcracker/qubership-core-control-plane/util"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/tlsmode"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util"
 	"github.com/netcracker/qubership-core-lib-go/v3/logging"
 	"net/url"
 	"os"

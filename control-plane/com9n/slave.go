@@ -2,7 +2,7 @@ package com9n
 
 import (
 	"fmt"
-	"github.com/netcracker/qubership-core-control-plane/data"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/data"
 )
 
 func NewSlaveNodeDataReceiver(storage data.RestorableStorage, subscriber ActivatableSubscriber, provider RemoteSnapshotProvider, configUpdater ConfigUpdater) *DataReceiver {

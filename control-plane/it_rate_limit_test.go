@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/netcracker/qubership-core-control-plane/restcontrollers/dto"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/dto"
 	asrt "github.com/stretchr/testify/assert"
 	"net/http"
 	"testing"

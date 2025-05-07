@@ -1,7 +1,7 @@
 package controller
 
-import "github.com/netcracker/qubership-core-control-plane/restcontrollers/dto"
-import "github.com/netcracker/qubership-core-control-plane/services/configresources"
+import "github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/dto"
+import "github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/configresources"
 
 // swagger:parameters HandlePostRoutesWithNodeGroupV1
 type RouteEntityRequestParameter struct {

@@ -2,8 +2,8 @@ package entity
 
 import (
 	"context"
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
 )
 
 func (srv *Service) CreateOrUpdateNodeGroup(dao dao.Repository, nodeGroup domain.NodeGroup) (domain.NodeGroup, error) {

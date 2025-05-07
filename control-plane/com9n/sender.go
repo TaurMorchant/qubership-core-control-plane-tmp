@@ -1,9 +1,9 @@
 package com9n
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/clustering"
-	"github.com/netcracker/qubership-core-control-plane/data"
-	"github.com/netcracker/qubership-core-control-plane/util"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/clustering"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/data"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util"
 	"sync/atomic"
 	"time"
 )

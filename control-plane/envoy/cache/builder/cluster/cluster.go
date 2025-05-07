@@ -1,16 +1,16 @@
 package cluster
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache/builder/common"
-	"github.com/netcracker/qubership-core-control-plane/services/cluster/clusterkey"
-	"github.com/netcracker/qubership-core-control-plane/services/dns"
-	"github.com/netcracker/qubership-core-control-plane/services/provider"
-	"github.com/netcracker/qubership-core-control-plane/tlsmode"
-	"github.com/netcracker/qubership-core-control-plane/util"
-	"github.com/netcracker/qubership-core-control-plane/util/msaddr"
-	tlsUtil "github.com/netcracker/qubership-core-control-plane/util/tls"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache/builder/common"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/cluster/clusterkey"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/dns"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/provider"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/tlsmode"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util/msaddr"
+	tlsUtil "github.com/netcracker/qubership-core-control-plane/control-plane/v2/util/tls"
 	"os"
 	"strings"
 

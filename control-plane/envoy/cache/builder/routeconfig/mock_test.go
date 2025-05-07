@@ -2,8 +2,8 @@ package routeconfig
 
 import (
 	"github.com/golang/mock/gomock"
-	mock_dao "github.com/netcracker/qubership-core-control-plane/test/mock/dao"
-	mock_routeconfig "github.com/netcracker/qubership-core-control-plane/test/mock/envoy/cache/builder/routeconfig"
+	mock_dao "github.com/netcracker/qubership-core-control-plane/control-plane/v2/test/mock/dao"
+	mock_routeconfig "github.com/netcracker/qubership-core-control-plane/control-plane/v2/test/mock/envoy/cache/builder/routeconfig"
 )
 
 func getMockDao(ctrl *gomock.Controller) *mock_dao.MockDao {

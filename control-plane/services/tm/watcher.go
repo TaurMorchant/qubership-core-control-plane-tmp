@@ -4,11 +4,11 @@ package tm
 
 import (
 	"context"
-	"github.com/netcracker/qubership-core-control-plane/clustering"
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache"
-	"github.com/netcracker/qubership-core-control-plane/tlsmode"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/clustering"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/tlsmode"
 	"github.com/netcracker/qubership-core-lib-go/v3/logging"
 	"time"
 )

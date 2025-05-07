@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/utils"
-	"github.com/netcracker/qubership-core-control-plane/dr"
-	"github.com/netcracker/qubership-core-control-plane/errorcodes"
-	"github.com/netcracker/qubership-core-control-plane/restcontrollers/dto"
-	"github.com/netcracker/qubership-core-control-plane/restcontrollers/restutils"
-	"github.com/netcracker/qubership-core-control-plane/services/httpFilter"
-	"github.com/netcracker/qubership-core-control-plane/services/httpFilter/extAuthz"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dr"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/errorcodes"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/dto"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/restutils"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/httpFilter"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/httpFilter/extAuthz"
 )
 
 type HttpFilterController struct {

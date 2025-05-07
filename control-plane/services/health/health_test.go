@@ -2,7 +2,7 @@ package health
 
 import (
 	"fmt"
-	"github.com/netcracker/qubership-core-control-plane/clustering"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/clustering"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

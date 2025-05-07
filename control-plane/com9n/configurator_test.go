@@ -2,9 +2,9 @@ package com9n
 
 import (
 	"fmt"
-	"github.com/netcracker/qubership-core-control-plane/clustering"
-	"github.com/netcracker/qubership-core-control-plane/data"
-	bus2 "github.com/netcracker/qubership-core-control-plane/event/bus"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/clustering"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/data"
+	bus2 "github.com/netcracker/qubership-core-control-plane/control-plane/v2/event/bus"
 	"github.com/netcracker/qubership-core-lib-go/v3/configloader"
 	"github.com/stretchr/testify/assert"
 	"testing"

@@ -1,6 +1,6 @@
 package dao
 
-import "github.com/netcracker/qubership-core-control-plane/domain"
+import "github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
 
 func (d *InMemRepo) SaveExtAuthzFilter(filter *domain.ExtAuthzFilter) error {
 	return d.SaveEntity(domain.ExtAuthzFilterTable, filter)

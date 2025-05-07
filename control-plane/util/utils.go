@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/ghodss/yaml"
 	"github.com/golang/protobuf/ptypes/duration"
-	"github.com/netcracker/qubership-core-control-plane/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
 	"reflect"
 	"regexp"
 	"strconv"

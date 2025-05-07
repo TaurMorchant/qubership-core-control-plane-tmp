@@ -2,9 +2,9 @@ package event
 
 import (
 	"github.com/golang/mock/gomock"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	mock_dao "github.com/netcracker/qubership-core-control-plane/test/mock/dao"
-	mock_action "github.com/netcracker/qubership-core-control-plane/test/mock/envoy/cache/action"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	mock_dao "github.com/netcracker/qubership-core-control-plane/control-plane/v2/test/mock/dao"
+	mock_action "github.com/netcracker/qubership-core-control-plane/control-plane/v2/test/mock/envoy/cache/action"
 	"strconv"
 )
 

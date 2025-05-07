@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/go-errors/errors"
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/services/entity"
-	routes_utils "github.com/netcracker/qubership-core-control-plane/util/routes"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/entity"
+	routes_utils "github.com/netcracker/qubership-core-control-plane/control-plane/v2/util/routes"
 	"strings"
 )
 

@@ -2,8 +2,8 @@ package v1
 
 import (
 	"fmt"
-	"github.com/netcracker/qubership-core-control-plane/restcontrollers/restutils"
-	"github.com/netcracker/qubership-core-control-plane/services/tls"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/restutils"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/tls"
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"

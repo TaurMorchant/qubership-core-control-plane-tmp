@@ -3,9 +3,9 @@ package event
 import (
 	"github.com/golang/mock/gomock"
 	"github.com/hashicorp/go-memdb"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache/action"
-	mock_builder "github.com/netcracker/qubership-core-control-plane/test/mock/envoy/cache/builder"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache/action"
+	mock_builder "github.com/netcracker/qubership-core-control-plane/control-plane/v2/test/mock/envoy/cache/builder"
 	"testing"
 )
 

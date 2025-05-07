@@ -3,9 +3,9 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/lib"
-	"github.com/netcracker/qubership-core-control-plane/restcontrollers/dto"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/lib"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/dto"
 	asrt "github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"net/http"

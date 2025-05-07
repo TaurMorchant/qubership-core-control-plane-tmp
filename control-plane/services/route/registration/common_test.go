@@ -1,7 +1,7 @@
 package registration
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/tlsmode"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/tlsmode"
 	"github.com/netcracker/qubership-core-lib-go/v3/configloader"
 	"os"
 	"strconv"

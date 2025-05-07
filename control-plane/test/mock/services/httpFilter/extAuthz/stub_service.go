@@ -6,7 +6,7 @@ package mock_extAuthz
 
 import (
 	context "context"
-	dto "github.com/netcracker/qubership-core-control-plane/restcontrollers/dto"
+	dto "github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/dto"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"

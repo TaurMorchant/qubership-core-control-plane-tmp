@@ -5,7 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/netcracker/qubership-core-control-plane/restcontrollers/dto"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/dto"
 	asrt "github.com/stretchr/testify/assert"
 	"github.com/tidwall/gjson"
 	"io"

@@ -5,7 +5,7 @@
 package mock_routeconfig
 
 import (
-	domain "github.com/netcracker/qubership-core-control-plane/domain"
+	domain "github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
 	reflect "reflect"
 
 	routev3 "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"

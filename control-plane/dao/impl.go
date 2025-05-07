@@ -3,9 +3,9 @@ package dao
 import (
 	"github.com/go-errors/errors"
 	"github.com/hashicorp/go-memdb"
-	"github.com/netcracker/qubership-core-control-plane/data"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/ram"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/data"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/ram"
 )
 
 type InMemDao struct {

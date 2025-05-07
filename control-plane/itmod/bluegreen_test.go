@@ -3,9 +3,8 @@ package itmod
 import (
 	"encoding/json"
 	"github.com/gofiber/fiber/v2"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/restcontrollers/dto"
-	_ "github.com/netcracker/qubership-core-control-plane/serviceregistrar"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/dto"
 	fiberserver "github.com/netcracker/qubership-core-lib-go-fiber-server-utils/v2"
 	asrt "github.com/stretchr/testify/assert"
 	"io"

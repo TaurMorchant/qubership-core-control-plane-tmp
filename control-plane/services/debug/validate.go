@@ -1,9 +1,9 @@
 package debug
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/composite"
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/composite"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
 	"github.com/netcracker/qubership-core-lib-go/v3/logging"
 	"strconv"
 	"strings"

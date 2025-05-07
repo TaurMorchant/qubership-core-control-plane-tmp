@@ -5,11 +5,11 @@ import (
 	"github.com/fasthttp/websocket"
 	"github.com/gofiber/fiber/v2"
 	"github.com/hashicorp/go-memdb"
-	"github.com/netcracker/qubership-core-control-plane/clustering"
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/event/bus"
-	"github.com/netcracker/qubership-core-control-plane/event/events"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/clustering"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/event/bus"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/event/events"
 )
 
 type VersionController struct {

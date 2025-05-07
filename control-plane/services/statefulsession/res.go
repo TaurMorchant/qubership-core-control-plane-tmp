@@ -3,8 +3,8 @@ package statefulsession
 import (
 	"context"
 	"errors"
-	"github.com/netcracker/qubership-core-control-plane/restcontrollers/dto"
-	cfgres "github.com/netcracker/qubership-core-control-plane/services/configresources"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/dto"
+	cfgres "github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/configresources"
 	"reflect"
 	"strings"
 )

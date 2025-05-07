@@ -2,8 +2,8 @@ package dto
 
 import (
 	"fmt"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/services/route/creator"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/route/creator"
 )
 
 type RouteRegistrationRequest struct {

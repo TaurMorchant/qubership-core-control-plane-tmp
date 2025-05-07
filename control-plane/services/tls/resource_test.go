@@ -2,8 +2,8 @@ package tls
 
 import (
 	"context"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache"
-	"github.com/netcracker/qubership-core-control-plane/restcontrollers/dto"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/dto"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

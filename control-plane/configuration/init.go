@@ -1,12 +1,12 @@
 package config
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/composite"
-	"github.com/netcracker/qubership-core-control-plane/constancy"
-	"github.com/netcracker/qubership-core-control-plane/dr"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache"
-	"github.com/netcracker/qubership-core-control-plane/services/entity"
-	"github.com/netcracker/qubership-core-control-plane/services/tls"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/composite"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/constancy"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dr"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/entity"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/tls"
 	"sync"
 	"time"
 )

@@ -2,8 +2,8 @@ package action
 
 import (
 	"github.com/envoyproxy/go-control-plane/pkg/resource/v3"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/envoy/cache/builder"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/envoy/cache/builder"
 )
 
 //go:generate mockgen -source=factory.go -destination=../../../test/mock/envoy/cache/action/stub_factory.go -package=mock_action

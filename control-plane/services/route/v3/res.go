@@ -2,10 +2,10 @@ package v3
 
 import (
 	"context"
-	"github.com/netcracker/qubership-core-control-plane/restcontrollers/dto"
-	v3 "github.com/netcracker/qubership-core-control-plane/restcontrollers/v3"
-	cfgres "github.com/netcracker/qubership-core-control-plane/services/configresources"
-	"github.com/netcracker/qubership-core-control-plane/services/route"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/dto"
+	v3 "github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/v3"
+	cfgres "github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/configresources"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/route"
 	"github.com/pkg/errors"
 	"reflect"
 	"strings"

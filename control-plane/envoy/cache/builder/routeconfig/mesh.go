@@ -3,11 +3,11 @@ package routeconfig
 import (
 	route "github.com/envoyproxy/go-control-plane/envoy/config/route/v3"
 	protoAny "github.com/golang/protobuf/ptypes/any"
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/services/entity"
-	"github.com/netcracker/qubership-core-control-plane/tlsmode"
-	"github.com/netcracker/qubership-core-control-plane/util"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/entity"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/tlsmode"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util"
 	"strings"
 )
 

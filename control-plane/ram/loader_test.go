@@ -3,10 +3,10 @@ package ram_test
 import (
 	"fmt"
 	"github.com/golang/mock/gomock"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/ram"
-	mock_ram "github.com/netcracker/qubership-core-control-plane/ram/mock"
-	test_mock_constancy "github.com/netcracker/qubership-core-control-plane/test/mock/constancy"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/ram"
+	mock_ram "github.com/netcracker/qubership-core-control-plane/control-plane/v2/ram/mock"
+	test_mock_constancy "github.com/netcracker/qubership-core-control-plane/control-plane/v2/test/mock/constancy"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

@@ -1,8 +1,8 @@
 package dao
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/util"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util"
 )
 
 func (d *InMemRepo) FindHashPolicyByRouteId(routeId int32) ([]*domain.HashPolicy, error) {

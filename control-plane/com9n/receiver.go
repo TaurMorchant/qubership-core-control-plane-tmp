@@ -1,7 +1,7 @@
 package com9n
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/data"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/data"
 )
 
 type DataReceiver struct {

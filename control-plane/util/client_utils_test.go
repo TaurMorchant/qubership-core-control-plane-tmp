@@ -10,7 +10,6 @@ import (
 	"crypto/x509/pkix"
 	"encoding/pem"
 	"errors"
-	_ "github.com/netcracker/qubership-core-control-plane/serviceregistrar"
 	"github.com/netcracker/qubership-core-lib-go/v3/configloader"
 	"github.com/netcracker/qubership-core-lib-go/v3/logging"
 	"github.com/stretchr/testify/assert"

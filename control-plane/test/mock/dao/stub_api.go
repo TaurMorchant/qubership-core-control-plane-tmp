@@ -5,9 +5,9 @@
 package mock_dao
 
 import (
-	dao "github.com/netcracker/qubership-core-control-plane/dao"
-	domain "github.com/netcracker/qubership-core-control-plane/domain"
-	msaddr "github.com/netcracker/qubership-core-control-plane/util/msaddr"
+	dao "github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	domain "github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	msaddr "github.com/netcracker/qubership-core-control-plane/control-plane/v2/util/msaddr"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"

@@ -2,7 +2,7 @@ package ram
 
 import (
 	"github.com/hashicorp/go-uuid"
-	"github.com/netcracker/qubership-core-control-plane/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

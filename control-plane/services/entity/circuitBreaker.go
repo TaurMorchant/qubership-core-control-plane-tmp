@@ -1,6 +1,6 @@
 package entity
 
-import "github.com/netcracker/qubership-core-control-plane/dao"
+import "github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
 
 func (srv *Service) DeleteCircuitBreakerCascadeById(dao dao.Repository, id int32) error {
 	circuitBreaker, err := dao.FindCircuitBreakerById(id)

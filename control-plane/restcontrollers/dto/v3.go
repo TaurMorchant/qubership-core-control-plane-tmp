@@ -2,7 +2,7 @@ package dto
 
 import (
 	"fmt"
-	"github.com/netcracker/qubership-core-control-plane/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
 	constants "github.com/netcracker/qubership-core-lib-go/v3/const"
 	"net"
 	"net/url"

@@ -2,9 +2,9 @@ package debug
 
 import (
 	"github.com/golang/mock/gomock"
-	"github.com/netcracker/qubership-core-control-plane/composite"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	mock_dao "github.com/netcracker/qubership-core-control-plane/test/mock/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/composite"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	mock_dao "github.com/netcracker/qubership-core-control-plane/control-plane/v2/test/mock/dao"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

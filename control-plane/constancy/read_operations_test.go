@@ -2,9 +2,9 @@ package constancy
 
 import (
 	"github.com/golang/mock/gomock"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	mock_constancy "github.com/netcracker/qubership-core-control-plane/test/mock/constancy"
-	mock_db "github.com/netcracker/qubership-core-control-plane/test/mock/db"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	mock_constancy "github.com/netcracker/qubership-core-control-plane/control-plane/v2/test/mock/constancy"
+	mock_db "github.com/netcracker/qubership-core-control-plane/control-plane/v2/test/mock/db"
 	"github.com/stretchr/testify/assert"
 	"github.com/uptrace/bun"
 	"testing"

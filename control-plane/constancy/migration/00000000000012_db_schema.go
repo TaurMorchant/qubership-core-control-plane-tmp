@@ -3,8 +3,8 @@ package migration
 import (
 	"context"
 	"database/sql"
-	"github.com/netcracker/qubership-core-control-plane/clustering"
-	"github.com/netcracker/qubership-core-control-plane/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/clustering"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
 	"github.com/uptrace/bun"
 )
 

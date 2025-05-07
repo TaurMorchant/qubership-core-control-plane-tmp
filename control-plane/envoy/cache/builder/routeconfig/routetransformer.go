@@ -1,6 +1,6 @@
 package routeconfig
 
-import "github.com/netcracker/qubership-core-control-plane/domain"
+import "github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
 
 type RouteTransformer struct {
 	transformationRulesChain []TransformationRule

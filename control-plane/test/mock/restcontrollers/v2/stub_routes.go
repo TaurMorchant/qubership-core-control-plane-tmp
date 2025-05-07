@@ -6,9 +6,9 @@ package mock_v2
 
 import (
 	context "context"
-	domain "github.com/netcracker/qubership-core-control-plane/domain"
-	dto "github.com/netcracker/qubership-core-control-plane/restcontrollers/dto"
-	configresources "github.com/netcracker/qubership-core-control-plane/services/configresources"
+	domain "github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	dto "github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/dto"
+	configresources "github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/configresources"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"

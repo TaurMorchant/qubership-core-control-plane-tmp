@@ -3,7 +3,7 @@ package migration
 import (
 	"context"
 	"database/sql"
-	"github.com/netcracker/qubership-core-control-plane/util/msaddr"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util/msaddr"
 	"github.com/uptrace/bun"
 	"strings"
 )

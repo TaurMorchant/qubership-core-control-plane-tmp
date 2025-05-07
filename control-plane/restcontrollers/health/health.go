@@ -2,8 +2,8 @@ package health
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/netcracker/qubership-core-control-plane/restcontrollers/restutils"
-	"github.com/netcracker/qubership-core-control-plane/services/health"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/restcontrollers/restutils"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/health"
 	"net/http"
 )
 

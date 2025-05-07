@@ -2,9 +2,9 @@ package constancy
 
 import (
 	"github.com/hashicorp/go-memdb"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/dr"
-	"github.com/netcracker/qubership-core-control-plane/errorcodes"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dr"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/errorcodes"
 )
 
 type BatchStorage interface {

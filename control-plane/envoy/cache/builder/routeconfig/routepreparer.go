@@ -1,13 +1,13 @@
 package routeconfig
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/services/cluster/clusterkey"
-	"github.com/netcracker/qubership-core-control-plane/services/entity"
-	"github.com/netcracker/qubership-core-control-plane/services/route/routekey"
-	"github.com/netcracker/qubership-core-control-plane/util"
-	routes_utils "github.com/netcracker/qubership-core-control-plane/util/routes"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/cluster/clusterkey"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/entity"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/route/routekey"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util"
+	routes_utils "github.com/netcracker/qubership-core-control-plane/control-plane/v2/util/routes"
 	"strings"
 )
 

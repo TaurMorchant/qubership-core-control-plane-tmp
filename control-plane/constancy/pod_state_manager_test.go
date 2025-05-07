@@ -3,8 +3,8 @@ package constancy
 import (
 	"errors"
 	"github.com/golang/mock/gomock"
-	"github.com/netcracker/qubership-core-control-plane/clustering"
-	mock_constancy "github.com/netcracker/qubership-core-control-plane/test/mock/constancy"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/clustering"
+	mock_constancy "github.com/netcracker/qubership-core-control-plane/control-plane/v2/test/mock/constancy"
 	"github.com/netcracker/qubership-core-lib-go/v3/configloader"
 	asrt "github.com/stretchr/testify/assert"
 	"os"

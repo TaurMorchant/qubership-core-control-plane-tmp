@@ -1,9 +1,9 @@
 package factory
 
 import (
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/services/entity"
-	"github.com/netcracker/qubership-core-control-plane/services/route/business"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/entity"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/route/business"
 )
 
 type ComponentsFactory struct {

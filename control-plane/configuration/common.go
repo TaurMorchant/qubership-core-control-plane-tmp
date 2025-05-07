@@ -2,12 +2,12 @@ package config
 
 import (
 	"github.com/hashicorp/go-memdb"
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/event/bus"
-	"github.com/netcracker/qubership-core-control-plane/event/events"
-	"github.com/netcracker/qubership-core-control-plane/services/entity"
-	"github.com/netcracker/qubership-core-control-plane/tlsmode"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/event/bus"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/event/events"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/entity"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/tlsmode"
 	"github.com/netcracker/qubership-core-lib-go/v3/logging"
 	"os"
 	"strings"

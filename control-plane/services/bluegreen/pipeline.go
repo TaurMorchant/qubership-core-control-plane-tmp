@@ -2,12 +2,12 @@ package bluegreen
 
 import (
 	"context"
-	"github.com/netcracker/qubership-core-control-plane/dao"
-	"github.com/netcracker/qubership-core-control-plane/domain"
-	"github.com/netcracker/qubership-core-control-plane/services/cluster/clusterkey"
-	"github.com/netcracker/qubership-core-control-plane/services/route/business"
-	"github.com/netcracker/qubership-core-control-plane/services/route/routekey"
-	"github.com/netcracker/qubership-core-control-plane/util/msaddr"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/dao"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/domain"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/cluster/clusterkey"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/route/business"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/services/route/routekey"
+	"github.com/netcracker/qubership-core-control-plane/control-plane/v2/util/msaddr"
 )
 
 type blueGreenPipelineChange struct {
