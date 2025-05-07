@@ -1,0 +1,1 @@
+ALTER TABLE election ADD COLUMN IF NOT EXISTS namespace varchar(256);

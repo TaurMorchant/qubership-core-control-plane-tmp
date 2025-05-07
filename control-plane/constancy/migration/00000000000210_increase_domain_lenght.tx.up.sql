@@ -1,0 +1,1 @@
+ALTER TABLE virtual_host_domains ALTER COLUMN domain TYPE varchar(261);

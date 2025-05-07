@@ -1,0 +1,61 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+
+entity VirtualHostBuilder
+entity RouteBuilder
+entity RoutePreparer
+entity InMemRepo
+
+VirtualHostBuilder -> RouteBuilder : BuildRoutes(routes []*domain.Route)
+activate RouteBuilder
+    ==loadRouteRelations(routes []*domain.Route) - fill routes with deployment version, header matchers, hash policy, retry policy, <color GREEN>**LocalRateLimit**</color>==
+    loop each route
+        RouteBuilder <--> InMemRepo : get related deployment version
+        RouteBuilder -> RouteBuilder : fill route with deployment version
+        RouteBuilder <--> InMemRepo : get related header matchers
+        RouteBuilder -> RouteBuilder : fill route with header matchers
+        RouteBuilder <--> InMemRepo : get related hash policy
+        RouteBuilder -> RouteBuilder : fill route with hash policy
+        RouteBuilder <--> InMemRepo : get related retry policy
+        RouteBuilder -> RouteBuilder : fill route with retry policy
+
+        RouteBuilder <--> InMemRepo : <color GREEN>**get related RateLimit by name which specified in route config**</color>
+        RouteBuilder -> RouteBuilder : <color GREEN>**fill route with RateLimitFilter (envoy.filters.http.local_ratelimit)**</color>
+        note right RouteBuilder
+            <color GREEN>**extensions.filters.http.local_ratelimit.v3.LocalRateLimit{**</color>
+            <color GREEN>**"stat_prefix": "name_of_rate_limit",**</color>
+            <color GREEN>**"token_bucket": "{**</color>
+                <color GREEN>**"max_tokens": "limit_request_per_second", **</color>
+                <color GREEN>**"tokens_per_fill": "limit_request_per_second", **</color>
+                <color GREEN>**"fill_interval": "1 second"**</color>
+            <color GREEN>**}",**</color>
+            <color GREEN>**"filter_enabled": "100% (all requests)",**</color>
+            <color GREEN>**"filter_enforced": "100% (all requests)",**</color>
+            <color GREEN>**"request_headers_to_add_when_not_enforced": [X-RateLimit-NotEnforced],**</color>
+            <color GREEN>**"response_headers_to_add": [X-RateLimit-Applied],**</color>
+            <color GREEN>**} **</color>
+        end note
+    end
+
+    ==Generate envoy route==
+    RouteBuilder <--> RoutePreparer : prepare routes
+    loop each route
+        RouteBuilder -> RouteBuilder : fill envoy route with PathSpecifier (fill Prefix, Path, SafeRegex) from domain.Route
+        RouteBuilder -> RouteBuilder : fill envoy route with RequestHeadersToAdd from domain.Route
+        RouteBuilder -> RouteBuilder : fill envoy route with RequestHeadersToRemove from RouteBuilderImpl
+
+        note right RouteBuilder
+            Further build of envoy route...
+        end note
+
+'        alt if route has same origin <color RED> ????</color>
+'
+'        end
+    end
+
+VirtualHostBuilder <-- RouteBuilder : envoy routes, error
+
+deactivate RouteBuilder
+
+@enduml

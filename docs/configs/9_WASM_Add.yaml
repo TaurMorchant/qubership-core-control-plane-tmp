@@ -1,0 +1,14 @@
+---
+apiVersion: nc.core.mesh/v3
+kind: HttpFilters
+spec:
+  gateways:
+    - egress
+  wasmFilters:
+    - name: my-wasm-filter
+      url: <extension-url.wasm>
+      sha256: 9785d160743d33f9bc841ed1804b313a69f5752fa8493f3b8d049b51617d5dd7
+      timeout: 10.00
+      params:
+        - firstProp: firstVal
+        - secondProp: 1.1

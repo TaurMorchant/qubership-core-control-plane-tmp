@@ -1,0 +1,13 @@
+= Control plane Documentation
+
+[horizontal]
+<<overview.adoc#overview, Overview>> :: Generic description of model and design philosophy
+<<bluegreen.adoc#bluegreen, Blue-green>> :: Describes blue-green model and its operations as _Promote_ and _Rollback_
+<<glossary.adoc#glossary, Gloassary>> :: List of terms are used
+<<api/control-plane-v1.adoc#_overview, REST API v1>> :: Includes registering routes, getting all routes configurations, setting and getting migration flag
+<<api/control-plane-v2.adoc#_overview, REST API v2>> :: Includes promote, rollback, version management, new API for deleting routes.
+
+***
+*Authors:*
+
+Dmitrii Olkhov

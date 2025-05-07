@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS namespace (namespace text primary key);

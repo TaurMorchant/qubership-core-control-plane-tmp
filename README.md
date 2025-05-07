@@ -1,5 +1,6 @@
-# qubership-repo-template
+[//]: ![logo](img/logo.png)
+# Control Plane Overview
 
-Click [here](https://github.com/Netcracker/qubership-repo-template/generate) to create your copy of this repository.
+Control-plane is a central microservice of Service Mesh. 
 
---- 
+Learn more: [Service Mesh Documentation](./docs/mesh/index.md)

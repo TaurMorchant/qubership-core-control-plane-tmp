@@ -1,0 +1,7 @@
+apiVersion: qubership.org/v1alpha
+kind: FacadeService
+metadata:
+  name: egress-gateway
+  namespace: <YOUR_NAMESPACE>
+spec:
+  port: 8080

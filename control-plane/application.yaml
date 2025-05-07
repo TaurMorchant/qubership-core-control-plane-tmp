@@ -1,0 +1,61 @@
+microservice:
+  name: control-plane
+  namespace: core-dev
+  
+http:
+  server:
+    bind: ":8080"
+grpc:
+  server:
+    bind: "15010"
+
+blue-green:
+  versions:
+    default-version: v1
+
+pod:
+  name: localhost
+  ip: 127.0.0.1
+swim:
+  port: 12345
+event:
+  bus:
+    port: 5431
+
+pprof:
+  port: 6060
+
+pg:
+  host: localhost
+  port: 5432
+  db: control-plane
+  user: postgres
+  passwd: postgres
+
+dbaas:
+  max:
+    open:
+      connections: 10
+  connections:
+    max:
+      lifetime: 10
+      idletime: 10
+
+envoy.proxy:
+  routes:
+    timeout: 120000
+  compression:
+    enabled: "false"
+    mime-types: "text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json"
+    min-response-size: 10240
+  tracing:
+    enabled: "false"
+    overall_sampling: 0.01
+    zipkin:
+      collector_cluster: "zipkin"
+      collector_endpoint: "/api/v2/spans"
+  googlere2:
+    maxsize: 200
+    warnsize: 150
+  connection:
+    per_connection_buffer_limit_megabytes: 10

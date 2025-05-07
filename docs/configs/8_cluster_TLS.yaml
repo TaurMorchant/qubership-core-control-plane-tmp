@@ -1,0 +1,88 @@
+---
+apiVersion: nc.core.mesh/v3
+kind: TlsDef
+spec:
+  name: custom-cert
+  tls:
+    enabled: true
+    insecure: false
+    sni: google.com
+    trustedCA: |
+      -----BEGIN CERTIFICATE-----
+      MIICyDCCAbCgAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      cm5ldGVzMB4XDTIwMDcwNzExMDIwMFoXDTMwMDcwNTExMDIwMFowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALu+
+      ufg5VVkefqzQFszAEl3CkkHmscOPJnn7HDG8iYqZjOLb8k1eStsHGnS39dMz2xK6
+      fgbZ8A1M0BVgbftguQX5+KB/dPaBkL5hSP6ScdQXRmsvwNLWSiE/mNfKICBdS685
+      MxiGyUjHuozGtcC+i8N+y5V9D1rzDxSJhra03oObexr46Wh1L32Zy8NCIu5FRgBY
+      Otwag59/VT17oiL8MXJexuSe/8lPzfX4Z3wVnCDT6axdtEQUiFQ4bCYELhQ8mrSa
+      /N32jX4F5QBmPfB2Ic6NRpdwIg/qWmKgGd3hX5Ke0UkmzM6gYXh8MpAlkSRuPpww
+      Kh/NylTO8FyWYNIhNPMCAwEAAaMjMCEwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEBABmMo9m27ujBjCaSTALzGl/LLstf
+      o1ryiQGjDoQq7VMuOldlEujP6Jii6MtJrot7ZH8o3U3OXbHfUFbSv/9A99x2i4NL
+      LWJ2fCOSev15AIhAsi1FElF9b+UK8ckQWJnHzO/ZXQVGs0BE4nwa9xJpiLeBGsQd
+      SXCg7hCti8EG6gHimJMmTot6UEbeuZ1DEJDeYNo4qBJMShpORUg6RSzPNb068cEC
+      RZ0yEkUCrS/EgFpV0+AtVF9y449cPRfbHDfc5oIOfsxYE5iyy84s4wuApSgyJ57S
+      I77Dk3uEyoQNdSVcX7oHxcYJzNYSqvyUqkeEtfgCgqVXtNEODMSiFGxjmlg=
+      -----END CERTIFICATE-----
+    clientCert: |
+      -----BEGIN CERTIFICATE-----
+      Otwag59/VT17oiL8MXJexuSe/8lPzfX4Z3wVnCDT6axdtEQUiFQ4bCYELhQ8mrSa
+      /N32jX4F5QBmPfB2Ic6NRpdwIg/qWmKgGd3hX5Ke0UkmzM6gYXh8MpAlkSRuPpww
+      Kh/NylTO8FyWYNIhNPMCAwEAAaMjMCEwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEBABmMo9m27ujBjCaSTALzGl/LLstf
+      o1ryiQGjDoQq7VMuOldlEujP6Jii6MtJrot7ZH8o3U3OXbHfUFbSv/9A99x2i4NL
+      LWJ2fCOSev15AIhAsi1FElF9b+UK8ckQWJnHzO/ZXQVGs0BE4nwa9xJpiLeBGsQd
+      SXCg7hCti8EG6gHimJMmTot6UEbeuZ1DEJDeYNo4qBJMShpORUg6RSzPNb068cEC
+      RZ0yEkUCrS/EgFpV0+AtVF9y449cPRfbHDfc5oIOfsxYE5iyy84s4wuApSgyJ57S
+      cm5ldGVzMB4XDTIwMDcwNzExMDIwMFoXDTMwMDcwNTExMDIwMFowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALu+
+      ufg5VVkefqzQFszAEl3CkkHmscOPJnn7HDG8iYqZjOLb8k1eStsHGnS39dMz2xK6
+      fgbZ8A1M0BVgbftguQX5+KB/dPaBkL5hSP6ScdQXRmsvwNLWSiE/mNfKICBdS685
+      MxiGyUjHuozGtcC+i8N+y5V9D1rzDxSJhra03oObexr46Wh1L32Zy8NCIu5FRgBY
+      MIICyDCCAbCgAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      I77Dk3uEyoQNdSVcX7oHxcYJzNYSqvyUqkeEtfgCgqVXtNEODMSiFGxjmlg=
+      -----END CERTIFICATE-----
+    privateKey: |
+      -----BEGIN PRIVATE KEY-----
+      MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC3HacRBZsYQ1m9
+      nMg3HEEglwo6STH8rooeOdJk/Hppg6jjhZESFDkXBy2/9x8kA3ttaFQ1946hWsxW
+      6lbrssvQij1JeLpoeOUBD0NR2E7JQ0CN2UvbFQxud/79L5bF3pg3ZhHMi2i5EyB6
+      4fkVD8aXr6Uah8fXaTpRjzzsVPM5OKeEfnu4edeL0R8nmrzXS4hynuGPbRNH/kR7
+      cWgabdN7NueK/qCtFwsOkEpbMXacRWqbZ2+Whqx/y1tioKwkRg8yLqBBQrQzsIlU
+      X5CGnUfLhASKIqWFVo7I+k3ImuLc+Q2hTGDHPeK1kPu5CmbJwfRBFPD2ZMW836X4
+      Y8Gnw9QkRsjbAlD+C1Ke/yK5VHq2646oVF6maN6OL/gbmmdZyAVGmqsHixs13iYu
+      wLJOWnm7h9lWuXtVOUwxzX3TsUr2jVY42iW4aIhiL2+OFS4DHg7NoEAlOQKBgFyt
+      pw5lCbqbxO98qzuc4XrgZsqbeUxW08cjDfOaaytNu0gdFtcLCSRTpX3e9Y4GirnV
+      iKjLgf5gTcF5IDlTaSbBzykmzPyiJGxJ8H+mVLDyQF2R8WCoV4+ktSS+qT/Tibsr
+      8DXXdigEoFefYEKVE8sDNLhcRzRc+eYykI/86HThAoGBAJbU88fIqpfNY2lCMslJ
+      OJfOYQLcD9zf5g0q0BIXSwhsMb+oqV3to1MAA9OCwxNmHbb9GzRuZW3CgxmjvTq0
+      B1ggWN1ig1KX2Gn/e0KbY7MSJ0UkUAoEUn8B5fKor7E/h+6SWMC9cduRKWhnvSJp
+      iX6g411Vw23Vh/EcyW36R6+A
+      -----END PRIVATE KEY-----
+---
+apiVersion: nc.core.mesh/v3
+kind: RouteConfiguration
+metadata:
+  name: echo-route
+  namespace: ''
+spec:
+  gateways:
+    - egress-gateway
+  virtualServices:
+    - name: egress-gateway
+      hosts: ["*"]
+      removeHeaders: ["Origin", "Authorization"]
+      routeConfiguration:
+        routes:
+          - destination:
+              cluster: google
+              endpoint: https://google.com
+              tlsConfigName: custom-cert
+            rules:
+              - match:
+                  prefix: /google
+                  headerMatchers:
+                    - name: tenant-id
+                      exactMatch: cloud-common
+                prefixRewrite: /

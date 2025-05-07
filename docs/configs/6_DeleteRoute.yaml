@@ -1,0 +1,12 @@
+---
+apiVersion: nc.core.mesh/v3
+kind: RoutesDrop
+metadata:
+  name: delete-old-trace-drop
+  namespace: cloud-core
+spec:
+- gateways: ["ingress-gateway"]
+  virtualService: trace-service
+  routes:
+  - prefix: /trace
+  version: v2

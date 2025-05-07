@@ -1,0 +1,1 @@
+ALTER TABLE routes ADD COLUMN IF NOT EXISTS idle_timeout bigint;

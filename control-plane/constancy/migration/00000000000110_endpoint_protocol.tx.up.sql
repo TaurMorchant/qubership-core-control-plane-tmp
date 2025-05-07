@@ -1,0 +1,1 @@
+alter table endpoints add column IF NOT EXISTS protocol varchar(32);

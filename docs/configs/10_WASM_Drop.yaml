@@ -1,0 +1,8 @@
+---
+apiVersion: nc.core.mesh/v3
+kind: HttpFiltersDrop
+spec:
+  gateways:
+    - egress
+  wasmFilters:
+    - name: my-wasm-filter

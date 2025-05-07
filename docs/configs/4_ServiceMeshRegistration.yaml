@@ -1,0 +1,30 @@
+apiVersion: nc.core.mesh/v3
+kind: RouteConfiguration
+metadata:
+  name: project-routes
+  namespace: cloud-core
+spec:
+  gateways: ["mesh-router"]
+  virtualServices:
+  - name: quotation-engine
+    routeConfiguration:
+      version: v1
+      routes:
+      - destination:
+          cluster: quotation-engine
+          endpoint: http://quotation-engine-v1:8080
+        rules:
+        - match:
+            prefix: /
+          prefixRewrite: /
+  - name: tenant-manager
+    routeConfiguration:
+      version: v1
+      routes:
+      - destination:
+          cluster: tenant-manager
+          endpoint: http://quotation-engine-v1:8080
+        rules:
+        - match:
+            prefix: /
+          prefixRewrite: /

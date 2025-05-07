@@ -1,0 +1,106 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+
+actor ClusteringInitializer
+
+entity ClusteringService
+
+box "Runtime created/configured services" #LightBlue
+    entity Elector
+    entity ElectionService
+    entity LifecycleManager
+    entity SerfNode
+    entity MasterNodeInitializer
+end box
+
+box "DB"
+    database PostgreSQL
+end box
+
+== Try to add internal record (common code) ==
+
+ClusteringService -> ElectionService : <color darkblue>tryAddInternalRecord()</color> - Try to add record with 'internal' name
+activate ElectionService
+    alt if count records in election table > 1
+        ElectionService -> PostgreSQL : Start transaction
+        activate PostgreSQL #Purple
+            ElectionService -> PostgreSQL : Delete all records from election table
+            ElectionService -> PostgreSQL : Insert record to election table \n Name = internal \n NodeInfo = {IP:"0.0.0.0", SWIMPort: 0, BusPort: 0} \n **SyncClock = now() + 60 sec**
+            ElectionService <-- PostgreSQL : End transaction
+        deactivate PostgreSQL
+    end
+    alt if count records in election table == 0 (table is empty) OR count records < 1
+        ElectionService-[hidden]->PostgreSQL
+        ElectionService -> PostgreSQL : Insert record to election table \n Name = internal \n NodeInfo = {IP:"0.0.0.0", SWIMPort: 0, BusPort: 0} \n **SyncClock = now() - 1 hour**
+    end
+    ClusteringService <-- ElectionService : error if exists
+deactivate ElectionService
+
+== Clustering initialization process ==
+
+ClusteringInitializer -> ClusteringService : CreateWithExistDb(postgreSqlService) - init election table
+activate ClusteringService
+    ClusteringService -> PostgreSQL : Create election table if not exists \n (Id, Name, NodeInfo, SyncClock (timestamp))
+    ClusteringService -> ElectionService : <color darkblue>tryAddInternalRecord()</color> - Try to add record with 'internal' name (see in **common code** section)
+    ClusteringInitializer <-- ClusteringService : ElectionService
+deactivate ClusteringService
+
+ClusteringInitializer -> ElectionService : DeleteSeveralRecordsFromDb()
+activate ElectionService
+    ElectionService -> PostgreSQL : Start transaction
+    activate PostgreSQL #Purple
+        ElectionService -> PostgreSQL : Delete all not 'internal' records (where name != 'internal')
+        ElectionService <-- PostgreSQL : End transaction
+    deactivate PostgreSQL
+    note right ElectionService
+        <color red>**!** In pod upscaling case new pod became MASTER. Old pod became SLAVE</color>
+    end note
+    ClusteringInitializer -> ElectionService : <color darkblue>tryAddInternalRecord()</color> - Try to add record with 'internal' name (see in **common code** section)
+deactivate ElectionService
+
+ClusteringInitializer -> Elector : Start()
+activate Elector #green
+    loop every 30 seconds
+        Elector -> ElectionService : TryWriteAsMaster(currentRecordFromElectionTable)
+        activate ElectionService
+            ElectionService -> PostgreSQL : Start transaction
+            activate PostgreSQL #Purple
+                alt if count records in election table == 1
+                    ElectionService -> PostgreSQL : Update record in election table where SyncClock < now(), **SyncClock = now() + 60 sec**
+                else else if count records in election table != 1 we need to restore records in election table
+                    ElectionService -> PostgreSQL : Delete all records from election table
+                    ElectionService -> PostgreSQL : Insert record to election table **SyncClock = now() + 60 sec**
+                end
+                ElectionService <-- PostgreSQL : End transaction
+            deactivate PostgreSQL
+        deactivate ElectionService
+        alt if TryWriteAsMaster(currentRecordFromElectionTable) method successfully completed
+            Elector -> LifecycleManager : defineNodeRole(currentRecordFromElectionTable)
+            activate LifecycleManager
+                alt if old master from memory cache == currentRecordFromElectionTable (new master)
+                    alt if old master name = new master name && old master node info = new master node info
+                        LifecycleManager -> LifecycleManager : Current role defined as **<color green>MASTER</color>**
+                    else else in case when new master != old master
+                        LifecycleManager -> LifecycleManager : Current role defined as **<color blue>SLAVE</color>**
+                    end
+                end
+                alt if current role == MASTER
+                    LifecycleManager -> MasterNodeInitializer : InitMaster()
+                    MasterNodeInitializer -> MasterNodeInitializer : load data from DB and sync to inmemory storage
+                    MasterNodeInitializer -> MasterNodeInitializer : load OOB routes
+                    MasterNodeInitializer -> MasterNodeInitializer : build envoy config
+                end
+            deactivate LifecycleManager
+            loop every 15 seconds
+'                break if masterRecord.Name != e.config.LifeCycleManager.currentMaster.Name || masterRecord.NodeInfo != e.config.LifeCycleManager.currentMaster.NodeInfo
+                Elector -> ElectionService : Update record in election table where SyncClock < now(), **SyncClock = now() + 60 sec**
+            end
+        else if TryWriteAsMaster(currentRecordFromElectionTable) method failed
+            Elector <--> PostgreSQL : get first record from election table as **MASTER**
+            Elector -> LifecycleManager : defineNodeRole(masterRecord)
+        end
+    end
+deactivate Elector
+
+@enduml

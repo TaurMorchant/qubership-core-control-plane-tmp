@@ -1,0 +1,1 @@
+ALTER TABLE routes ADD COLUMN IF NOT EXISTS ra_hostRewrite_literal varchar(500);

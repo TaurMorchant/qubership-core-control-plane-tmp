@@ -1,0 +1,28 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+
+actor user
+
+entity RateLimitController
+entity RateLimitService
+entity InMemRepo
+
+entity EnvoyConfigService
+
+user -> RateLimitController : PUT rate-limits/{rate-limit-name}
+
+activate RateLimitController
+    RateLimitController -> RateLimitService : create or update rate limit by name
+    activate RateLimitService
+        RateLimitService -> InMemRepo : create or update rate limit
+        RateLimitService -> EnvoyConfigService : create or update gateway configs via update all resource versions
+
+
+        RateLimitService -> RateLimitController : error
+    deactivate RateLimitService
+
+    user <-- RateLimitController : HTTP response with statuses: \n<color DARKGREEN>200 OK (successfully case)</color>
+deactivate RateLimitController
+
+@enduml

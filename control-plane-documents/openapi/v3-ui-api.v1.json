@@ -1,0 +1,204 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "info": {
+    "title": "UI API v3",
+    "version": "1.0",
+    "description": "API created for UI in MeshUI activity"
+  },
+  "servers": [
+    {
+      "url": "http://control-plane:8080"
+    }
+  ],
+  "paths": {
+    "/ui/routes/{route-uuid}/details": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/route-uuid"
+        }
+      ],
+      "summary": "Abcd",
+      "get": {
+        "summary": "Get route details",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RouteDetails"
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "uuid": "",
+                      "prefixRewrite": "",
+                      "regex": "",
+                      "regexRewrite": "",
+                      "path": "",
+                      "pathRewrite": "",
+                      "clusterName": "",
+                      "directResponse": 0,
+                      "hostRewrite": "",
+                      "hostAutoRewrite": false,
+                      "timeout": 0,
+                      "requestHeadersToAdd": [
+                        {
+                          "name": "",
+                          "value": ""
+                        }
+                      ],
+                      "requestHeadersToRemove": [
+                        ""
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Get detailed information about route.",
+        "operationId": "GetRouteDetails",
+        "security": [
+          {
+            "cloud-admin": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RouteDetails": {
+        "title": "RouteDetails",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "value": {
+              "uuid": "",
+              "prefixRewrite": "",
+              "regex": "",
+              "regexRewrite": "",
+              "path": "",
+              "pathRewrite": "",
+              "clusterName": "",
+              "directResponse": "",
+              "hostRewrite": "",
+              "hostAutoRewrite": "",
+              "timeout": 0,
+              "requestHeadersToAdd": [
+                {
+                  "name": "",
+                  "value": ""
+                }
+              ],
+              "requestHeadersToRemove": [
+                ""
+              ]
+            }
+          }
+        },
+        "properties": {
+          "uuid": {
+            "type": "string"
+          },
+          "prefix": {
+            "type": "string"
+          },
+          "prefixRewrite": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "pathRewrite": {
+            "type": "string"
+          },
+          "regex": {
+            "type": "string"
+          },
+          "regexRewrite": {
+            "type": "string"
+          },
+          "clusterName": {
+            "type": "string"
+          },
+          "directResponse": {
+            "type": "integer"
+          },
+          "hostRewrite": {
+            "type": "string"
+          },
+          "hostAutoRewrite": {
+            "type": "boolean"
+          },
+          "timeout": {
+            "type": "integer"
+          },
+          "requestHeaderToAdd": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "requestHeaderToRemove": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "uuid",
+          "clusterName",
+          "timeout"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "cloud-admin": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "",
+            "tokenUrl": "",
+            "refreshUrl": "",
+            "scopes": {}
+          },
+          "implicit": {
+            "authorizationUrl": "",
+            "refreshUrl": "",
+            "scopes": {}
+          }
+        }
+      }
+    },
+    "parameters": {
+      "route-uuid": {
+        "name": "route-uuid",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Route UUID"
+      }
+    }
+  },
+  "security": [
+    {
+      "API Key - 1": []
+    }
+  ]
+}

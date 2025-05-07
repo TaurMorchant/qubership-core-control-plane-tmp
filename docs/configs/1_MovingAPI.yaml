@@ -1,0 +1,30 @@
+apiVersion: nc.core.mesh/v3
+kind: RouteConfiguration
+metadata:
+  name: tenant-manager-routes
+  namespace: cloud-core
+spec:
+  gateways: ["ingress-gateway"]
+  virtualServices:
+  - name: public-gateway-service
+    routeConfiguration:
+      version: v1
+      routes:
+      - destination:
+          cluster: tenant-manager
+          endpoint: http://tenant-manager-v1:8080
+        rules:
+        - match:
+            prefix: /api/v4/tenant-manager/tenants
+
+          prefixRewrite: /api/v4/tenants
+        - match:
+            prefix: /api/v4/tenant-manager/tenant/{tenantId}/suspend
+      - destination:
+          cluster: site-management
+          endpoint: http://site-management-v1:8080
+        rules:
+        - match:
+            prefix: /api/v4/tenant-manager/tenant/{tenantId}/routes
+          prefixRewrite: /api/v4/tenant/{tenantId}/routes
+  - name: ...

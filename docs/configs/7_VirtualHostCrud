@@ -1,0 +1,29 @@
+curl --location --request DELETE 'http://control-plane:8080/api/v3/{nodeGroup}/{virtualServiceName}'
+
+curl --location --request PUT 'http://control-plane:8080/api/v3/{nodeGroup}/{virtualServiceName}' \
+--header 'Content-Type: text/plain' \
+--data-raw '{
+    "hosts": ["www.google.com"],
+    "addHeaders": [
+        {
+            "name": "Token",
+            "value": "12345"
+        }
+    ]
+    removeHeadders: ["Authorization"]
+}'
+
+curl --location --request POST 'http://control-plane:8080/api/v3/{nodeGroup}/{virtualServiceName}' \
+--header 'Content-Type: text/plain' \
+--data-raw '{
+    "hosts": ["www.google.com"],
+    "addHeaders": [
+        {
+            "name": "Token",
+            "value": "12345"
+        }
+    ]
+    removeHeadders: ["Authorization"]
+}'
+
+curl --location --request GET 'http://control-plane:8080/api/v3/{nodeGroup}/{virtualServiceName}'

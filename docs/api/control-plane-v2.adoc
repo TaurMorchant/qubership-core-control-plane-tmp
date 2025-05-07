@@ -1,0 +1,1126 @@
+= Control Plane API
+
+
+[[_overview]]
+== Overview
+Designed as part of Blue-green deployment feature. It supports versioning of routes, creating of node-groups and optimized envoy configuration.
+
+
+=== Version information
+[%hardbreaks]
+__Version__ : 2.0
+
+
+=== URI scheme
+[%hardbreaks]
+__Host__ : localhost
+__BasePath__ : /
+
+
+=== Tags
+
+* Blue-green functional : Blue Green Controller V 2
+* Routes management - Version 2 : Route Controller V 2
+
+
+
+
+[[_paths]]
+== Resources
+
+[[_blue-green_functional_resource]]
+=== Blue-green Functional
+Blue Green Controller V 2
+
+
+[[_promoteusingpost_1]]
+==== Promote
+....
+POST /api/v2/control-plane/promote/{version}
+....
+
+
+===== Description
+Promotes specified version. Makes version as ACTIVE and previous ACTIVE becomes LEGACY.
+
+
+===== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**version** +
+__required__|version to promote|string
+|**Query**|**archiveSize** +
+__optional__|size of archive being left at CP|integer (int32)
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**202**|Accepted|< <<_deploymentversion,DeploymentVersion>> > array
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `application/json;charset=UTF-8`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v2/control-plane/promote/v4
+----
+
+
+===== Example HTTP response
+
+====== Response 202
+[source,json]
+----
+[ {
+  "createdWhen" : "string",
+  "stage" : "string",
+  "updatedWhen" : "string",
+  "version" : "string"
+} ]
+----
+
+
+[[_rollbackusingpost_1]]
+==== Rollback
+....
+POST /api/v2/control-plane/rollback
+....
+
+
+===== Description
+Returns state of versions back to state before promoting.
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**202**|Accepted|< <<_deploymentversion,DeploymentVersion>> > array
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `application/json;charset=UTF-8`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v2/control-plane/rollback
+----
+
+
+===== Example HTTP response
+
+====== Response 202
+[source,json]
+----
+[ {
+  "createdWhen" : "string",
+  "stage" : "string",
+  "updatedWhen" : "string",
+  "version" : "string"
+} ]
+----
+
+
+[[_getroutingmodedetailsusingget_1]]
+==== Get routing mode details
+....
+GET /api/v2/control-plane/routing/details
+....
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_routingmodedetails,RoutingModeDetails>>
+|===
+
+
+===== Produces
+
+* `\*/*`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v2/control-plane/routing/details
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source,json]
+----
+{
+  "routeKeys" : [ "string" ],
+  "routingMode" : "string"
+}
+----
+
+
+[[_getalldeploymentversionsusingget_1]]
+==== Get All deployment versions
+....
+GET /api/v2/control-plane/versions
+....
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|< <<_deploymentversion,DeploymentVersion>> > array
+|===
+
+
+===== Produces
+
+* `\*/*`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v2/control-plane/versions
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source,json]
+----
+[ {
+  "createdWhen" : "string",
+  "stage" : "string",
+  "updatedWhen" : "string",
+  "version" : "string"
+} ]
+----
+
+
+[[_deleteversionusingdelete_1]]
+==== Delete version
+....
+DELETE /api/v2/control-plane/versions/{version}
+....
+
+
+===== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**version** +
+__required__|version|string
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|No Content
+|===
+
+
+===== Produces
+
+* `\*/*`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v2/control-plane/versions/string
+----
+
+
+[[applyloadbalanceconfiguration]]
+==== Apply load balance configuration
+....
+POST /api/v2/control-plane/load-balance
+....
+
+
+===== Body parameter
+
+[%hardbreaks]
+__Name__ : loadBalanceSpec
+__Flags__ : required
+__Type__ : <<loadbalancespec,LoadBalanceSpec>>
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|No Content
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `\*/*`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v2/control-plane/load-balance
+----
+
+
+====== Request body
+[source,json]
+----
+{
+  "cluster": "test-cluster",
+  "endpoint": "trace-service-1:8080",
+  "version": "v1",
+  "policies": [
+    {
+      "header": {
+        "headerName": "BID"
+      },
+      "cookie": {
+        "name": "JSESSIONID",
+        "ttl": 0
+      }
+    }
+  ]
+}
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source]
+----
+
+----
+
+
+[[_routes_management_version_2_resource]]
+=== Routes Management - Version 2
+Route Controller V 2
+
+
+[[_deleterouteusingdelete_5]]
+==== Delete Routes
+....
+DELETE /api/v2/control-plane/routes
+....
+
+
+===== Body parameter
+deleteRequests
+
+[%hardbreaks]
+__Name__ : deleteRequests
+__Flags__ : required
+__Type__ : < <<_routedeleterequest,RouteDeleteRequest>> > array
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|< <<_route,Route>> > array
+|===
+
+
+===== Produces
+
+* `\*/*`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v2/control-plane/routes
+----
+
+
+====== Request body
+[source,json]
+----
+[ {
+  "namespace" : "string",
+  "routes" : [ {
+    "prefix" : "string"
+  } ],
+  "version" : "string"
+} ]
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source,json]
+----
+[ {
+  "action" : {
+    "clusterName" : "string",
+    "hostAutoRewrite" : true,
+    "hostRewrite" : "string",
+    "pathRewrite" : "string",
+    "prefixRewrite" : "string"
+  },
+  "autoGenerated" : true,
+  "deploymentVersion" : {
+    "createdWhen" : "string",
+    "stage" : "string",
+    "updatedWhen" : "string",
+    "version" : "string"
+  },
+  "directResponseAction" : {
+    "status" : 0
+  },
+  "hashPolicy" : [ {
+    "connectionProperties" : { },
+    "cookie" : { },
+    "header" : { },
+    "id" : 0,
+    "queryParameter" : { },
+    "terminal" : true
+  } ],
+  "id" : 0,
+  "initialDeploymentVersion" : "string",
+  "matcher" : {
+    "headers" : [ {
+      "exactMatch" : "string",
+      "id" : 0,
+      "name" : "string",
+      "version" : 0
+    } ],
+    "path" : "string",
+    "prefix" : "string",
+    "regExp" : "string"
+  },
+  "routeKey" : "string",
+  "timeout" : 0,
+  "timeoutSeconds" : 0,
+  "version" : 0
+} ]
+----
+
+
+[[_createroutesusingpost_3]]
+==== Create/Update routes
+....
+POST /api/v2/control-plane/routes/{nodeGroup}
+....
+
+
+===== Description
+Create or Update routes for specified node-group.
+
+
+===== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**nodeGroup** +
+__required__|tells which group of envoys must get routes|string
+|===
+
+
+===== Body parameter
+set of routes and additional info for routing
+
+[%hardbreaks]
+__Name__ : registrationRequest
+__Flags__ : required
+__Type__ : < <<_routeregistrationrequest,RouteRegistrationRequest>> > array
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_deferredresult,DeferredResult>>
+|===
+
+
+===== Consumes
+
+* `application/json;charset=UTF-8`
+
+
+===== Produces
+
+* `\*/*`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v2/control-plane/routes/string
+----
+
+
+====== Request body
+[source,json]
+----
+[ {
+  "allowed" : true,
+  "cluster" : "string",
+  "endpoint" : "string",
+  "namespace" : "string",
+  "routes" : [ {
+    "prefix" : "string",
+    "prefixRewrite" : "string"
+  } ],
+  "version" : "string"
+} ]
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source,json]
+----
+{
+  "result" : "object",
+  "setOrExpired" : true
+}
+----
+
+
+[[_deleterouteusingdelete_4]]
+==== Delete Routes by node-group
+....
+DELETE /api/v2/control-plane/routes/{nodeGroup}
+....
+
+
+===== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**nodeGroup** +
+__required__|nodeGroup|string
+|===
+
+
+===== Body parameter
+deleteRequests
+
+[%hardbreaks]
+__Name__ : deleteRequests
+__Flags__ : required
+__Type__ : < <<_routedeleterequest,RouteDeleteRequest>> > array
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|< <<_route,Route>> > array
+|===
+
+
+===== Produces
+
+* `\*/*`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v2/control-plane/routes/string
+----
+
+
+====== Request body
+[source,json]
+----
+[ {
+  "namespace" : "string",
+  "routes" : [ {
+    "prefix" : "string"
+  } ],
+  "version" : "string"
+} ]
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source,json]
+----
+[ {
+  "action" : {
+    "clusterName" : "string",
+    "hostAutoRewrite" : true,
+    "hostRewrite" : "string",
+    "pathRewrite" : "string",
+    "prefixRewrite" : "string"
+  },
+  "autoGenerated" : true,
+  "deploymentVersion" : {
+    "createdWhen" : "string",
+    "stage" : "string",
+    "updatedWhen" : "string",
+    "version" : "string"
+  },
+  "directResponseAction" : {
+    "status" : 0
+  },
+  "hashPolicy" : [ {
+    "connectionProperties" : { },
+    "cookie" : { },
+    "header" : { },
+    "id" : 0,
+    "queryParameter" : { },
+    "terminal" : true
+  } ],
+  "id" : 0,
+  "initialDeploymentVersion" : "string",
+  "matcher" : {
+    "headers" : [ {
+      "exactMatch" : "string",
+      "id" : 0,
+      "name" : "string",
+      "version" : 0
+    } ],
+    "path" : "string",
+    "prefix" : "string",
+    "regExp" : "string"
+  },
+  "routeKey" : "string",
+  "timeout" : 0,
+  "timeoutSeconds" : 0,
+  "version" : 0
+} ]
+----
+
+
+[[deleteroutebyuuid]]
+==== Delete route by UUID
+....
+DELETE /api/v2/control-plane/routes/uuid/{uuid}
+....
+
+
+===== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**uuid** +
+__required__|Route UUID|UUID
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_route,Route>>
+|===
+
+
+===== Produces
+
+* `application/json`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v2/control-plane/routes/uuid/285d3ba5-d024-4c29-a7d8-2eec7e03aafa
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source,json]
+----
+{
+  "Id": 182,
+  "Uuid": "285d3ba5-d024-4c29-a7d8-2eec7e03aafa",
+  "VirtualHostId": 3,
+  "VirtualHost": null,
+  "RouteKey": "||/api/v4/tenant-manager/openshift||v1",
+  "DirectResponseCode": 404,
+  "Prefix": "/api/v4/tenant-manager/openshift",
+  "Regexp": "",
+  "Path": "",
+  "ClusterName": "tenant-manager||tenant-manager||8080",
+  "HostRewrite": "tenant-manager:8080",
+  "HostAutoRewrite": null,
+  "PrefixRewrite": "",
+  "PathRewrite": "",
+  "Version": 2,
+  "Timeout": null,
+  "DeploymentVersion": "v1",
+  "DeploymentVersionVal": {
+    "version": "v1",
+    "stage": "ACTIVE",
+    "createdWhen": "2020-08-11T09:00:38.841312Z",
+    "updatedWhen": "2020-08-11T09:00:38.841312Z"
+  },
+  "InitialDeploymentVersion": "v1",
+  "Autogenerated": false,
+  "HeaderMatchers": [],
+  "HashPolicies": []
+}
+----
+
+[[_deleteendpoints]]
+==== Delete Endpoints
+....
+DELETE /api/v2/control-plane/endpoints
+....
+
+
+===== Parameters
+
+===== Body parameter
+deleteRequests
+
+[%hardbreaks]
+__Name__ : deleteRequests
+__Flags__ : required
+__Type__ : < <<_endpointdeleterequest,EndpointDeleteRequest>> > array
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|< <<_route,Endpoint>> > array
+|===
+
+
+===== Produces
+
+* `\*/*`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v2/control-plane/endpoints
+----
+
+
+====== Request body
+To bulk deletion by deployment version send empty "endpoints" array !!!
+[source,json]
+----
+[{
+  "version" : "string",
+  "endpoints" : [ {
+    "address" : "string",
+    "port" : 8080
+  } ]
+}]
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source,json]
+----
+[ {
+  "id" : 0,
+  "address" : "string",
+  "port" : 8080,
+  "clusterId" : 0,
+  "cluster" : null,
+  "deploymentVersion" : "string",
+  "deploymentVersionVal" : {
+    "version": "string",
+    "stage": "string",
+    "createdWhen": "Time",
+    "updatedWhen": "Time"
+  },
+  "hashPolicies" : []
+}]
+----
+
+
+
+[[_definitions]]
+== Definitions
+
+[[_connectionproperties]]
+=== ConnectionProperties
+__Type__ : object
+
+
+[[_cookie]]
+=== Cookie
+__Type__ : object
+
+
+[[_deferredresult]]
+=== DeferredResult
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**result** +
+__optional__|**Example** : `"object"`|object
+|**setOrExpired** +
+__optional__|**Example** : `true`|boolean
+|===
+
+
+[[_deploymentversion]]
+=== DeploymentVersion
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**createdWhen** +
+__optional__|**Example** : `"string"`|string (date-time)
+|**stage** +
+__optional__|**Example** : `"string"`|enum (LEGACY, ACTIVE, CANDIDATE, ARCHIVED)
+|**updatedWhen** +
+__optional__|**Example** : `"string"`|string (date-time)
+|**version** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_directresponseaction]]
+=== DirectResponseAction
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**status** +
+__optional__|**Example** : `0`|integer (int32)
+|===
+
+
+[[_hashpolicy]]
+=== HashPolicy
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**connectionProperties** +
+__optional__|**Example** : <<_connectionproperties>>|<<_connectionproperties,ConnectionProperties>>
+|**cookie** +
+__optional__|**Example** : <<_cookie>>|<<_cookie,Cookie>>
+|**header** +
+__optional__|**Example** : <<_header>>|<<_header,Header>>
+|**id** +
+__optional__|**Example** : `0`|integer (int64)
+|**queryParameter** +
+__optional__|**Example** : <<_queryparameter>>|<<_queryparameter,QueryParameter>>
+|**terminal** +
+__optional__|**Example** : `true`|boolean
+|===
+
+
+[[_header]]
+=== Header
+__Type__ : object
+
+
+[[_headermatcher]]
+=== HeaderMatcher
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**exactMatch** +
+__optional__|**Example** : `"string"`|string
+|**id** +
+__optional__|**Example** : `0`|integer (int64)
+|**name** +
+__optional__|**Example** : `"string"`|string
+|**version** +
+__optional__|**Example** : `0`|integer (int64)
+|===
+
+
+[[_queryparameter]]
+=== QueryParameter
+__Type__ : object
+
+
+[[_route]]
+=== Route
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**action** +
+__optional__|**Example** : <<_routeaction>>|<<_routeaction,RouteAction>>
+|**autoGenerated** +
+__optional__|**Example** : `true`|boolean
+|**deploymentVersion** +
+__optional__|**Example** : <<_deploymentversion>>|<<_deploymentversion,DeploymentVersion>>
+|**directResponseAction** +
+__optional__|**Example** : <<_directresponseaction>>|<<_directresponseaction,DirectResponseAction>>
+|**hashPolicy** +
+__optional__|**Example** : `[ "<<_hashpolicy>>" ]`|< <<_hashpolicy,HashPolicy>> > array
+|**id** +
+__optional__|**Example** : `0`|integer (int64)
+|**initialDeploymentVersion** +
+__optional__|**Example** : `"string"`|string
+|**matcher** +
+__optional__|**Example** : <<_routematcher>>|<<_routematcher,RouteMatcher>>
+|**routeKey** +
+__optional__|**Example** : `"string"`|string
+|**timeout** +
+__optional__|**Example** : `0`|integer (int64)
+|**timeoutSeconds** +
+__optional__|**Example** : `0`|integer (int64)
+|**version** +
+__optional__|**Example** : `0`|integer (int64)
+|===
+
+
+[[_routeaction]]
+=== RouteAction
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**clusterName** +
+__optional__|**Example** : `"string"`|string
+|**hostAutoRewrite** +
+__optional__|**Example** : `true`|boolean
+|**hostRewrite** +
+__optional__|**Example** : `"string"`|string
+|**pathRewrite** +
+__optional__|**Example** : `"string"`|string
+|**prefixRewrite** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_routedeleterequest]]
+=== RouteDeleteRequest
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**namespace** +
+__optional__|**Example** : `"string"`|string
+|**routes** +
+__optional__|**Example** : `[ "<<_routeitem>>" ]`|< <<_routeitem,RouteItem>> > array
+|**version** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_routeitem]]
+=== RouteItem
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**prefix** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_routematcher]]
+=== RouteMatcher
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**headers** +
+__optional__|**Example** : `[ "<<_headermatcher>>" ]`|< <<_headermatcher,HeaderMatcher>> > array
+|**path** +
+__optional__|**Example** : `"string"`|string
+|**prefix** +
+__optional__|**Example** : `"string"`|string
+|**regExp** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_routeregistrationrequest]]
+=== RouteRegistrationRequest
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**allowed** +
+__optional__|**Example** : `true`|boolean
+|**cluster** +
+__optional__|**Example** : `"string"`|string
+|**endpoint** +
+__optional__|**Example** : `"string"`|string
+|**namespace** +
+__optional__|**Example** : `"string"`|string
+|**routes** +
+__optional__|**Example** : `[ "<<_routesitem>>" ]`|< <<_routesitem,RoutesItem>> > array
+|**version** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_routesitem]]
+=== RoutesItem
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**prefix** +
+__optional__|**Example** : `"string"`|string
+|**prefixRewrite** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_routingmodedetails]]
+=== RoutingModeDetails
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**routeKeys** +
+__optional__|**Example** : `[ "string" ]`|< string > array
+|**routingMode** +
+__optional__|**Example** : `"string"`|enum (SIMPLE, NAMESPACED, VERSIONED, MIXED)
+|===
+
+
+[[loadbalancespec]]
+=== LoadBalanceSpec
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**cluster**|**Example** : `"my_service_name"`|string
+|**version** +
+__optional__|**Example** : `"v1"`|string
+|**endpoint**| **Example** : `"http://service_name:8080"`|string
+|**namespace** +
+__optional__|**Example** : `"my_namespace"`|string
+|**policies**|**Example** : `[{"header":{"headerName":"BID"}, "cookie":{"name":"JSESSIONID"}}]`|<<<hashpolicy,HashPolicy>>> array
+|===
+
+[[hashpolicy]]
+=== HashPolicy
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**header**|**Example** : `{"header":{"headerName":"BID"}}` |<<header_1,Header>>
+|**cookie** +
+__optional__|**Example** : `{"cookie":{"name":"JSESSIONID"}}`|<<cookie,Cookie>>
+|===
+
+[[header_1]]
+=== Header
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**headerName**|**Example** : `"BID"`|string
+|===
+
+[[cookie]]
+=== Cookie
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**name** +
+__optional__|**Example** : `"JSESSIONID"`| string
+|**ttl** +
+__optional__|**Example** : `0`| integer (int64)
+|**path** +
+__optional__|**Example** : `"/mypath"`| string
+|===
+
+[[_endpointdeleterequest]]
+=== EndpointDeleteRequest
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**endpoints** +
+__optional__|**Example** : `[ "<<_endpointitem>>" ]`|< <<_endpointitem,EndpointItem>> > array
+|**version** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_endpointitem]]
+=== EndpointItem
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**address** +
+|**Example** : `"string"`|string
+|**port** +
+|**Example** : `8080`|integer (int32)
+|===
+
+

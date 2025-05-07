@@ -1,0 +1,52 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+
+entity Service
+entity InMemRepo
+entity InMemoryStorageConfigurator
+entity Flusher
+entity PodStateManager
+
+box "Storage" #lightblue
+    database memdb
+    database PostgreSQL
+end box
+
+Service -> InMemRepo : Start transaction
+activate InMemRepo
+    InMemRepo -> memdb : Make operations with db
+    InMemRepo -> InMemoryStorageConfigurator : Run pre-commit callbacks
+    activate InMemoryStorageConfigurator
+        InMemoryStorageConfigurator -> Flusher : Flush
+        activate Flusher
+            Flusher -> PostgreSQL : Start transaction
+            activate PostgreSQL
+                note right Flusher
+                    **Sequence of transaction operations is set by Flusher**
+                end note
+                Flusher -> PostgreSQL : Run all INSERT operations (in order of execution)
+                Flusher -> PostgreSQL : Run all UPDATE operations (in order of execution)
+                Flusher -> PostgreSQL : Run all DELETE operations (in **reverse** order of execution)
+                Flusher <--> PodStateManager : Check that current pod mode is MASTER
+                alt if current pod mode is MASTER
+                    Flusher -> PostgreSQL : Commit transaction
+                    InMemoryStorageConfigurator <-- Flusher : error if exists
+                else if current pod mode is SLAVE/PHANTOM
+                    Flusher -> PostgreSQL : Rollback transaction
+                    InMemoryStorageConfigurator <-- Flusher : error
+                end
+            deactivate PostgreSQL
+        deactivate Flusher
+        InMemRepo <-- InMemoryStorageConfigurator : error if exists
+    deactivate InMemoryStorageConfigurator
+    alt if pre-commit callbacks successfully finished without errors
+        InMemRepo -> memdb : Commit transaction
+    else if pre-commit callbacks failed with errors
+        InMemRepo -> memdb : Rollback transaction
+    end
+deactivate InMemRepo
+
+
+
+@enduml

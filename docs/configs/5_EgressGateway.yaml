@@ -1,0 +1,46 @@
+apiVersion: nc.core.mesh/v3
+kind: RouteConfiguration
+metadata:
+  name: google-routes
+  namespace: cloud-core
+spec:
+  gateways: ["egress-gateway"]
+  virtualServices:
+  - name: google
+    addHeaders:
+    - name: Token
+      value: "12345"
+    removeHeaders: ["Origin", "Authorization"]
+    routeConfiguration:
+      routes:
+      - destination:
+          cluster: google
+          endpoint: http://google:8080
+        rules:
+        - match:
+            prefix: /
+            headerMatchers:
+            - name: Authorization
+              exactMatch:
+              regexMatch:
+          prefixRewrite: /
+          addHeaders:
+          - name: Token
+            value: "12345"
+          removeHeaders: ["Origin", "Authorization"]
+        - match:
+            prefix: /
+  - name: egress-gw
+    addHeaders:
+      - name: Token
+        value: "12345"
+    removeHeaders: ["Origin", "Authorization"]
+    routeConfiguration:
+      routes:
+      - destination:
+          cluster: google
+          endpoint: http://google:8080
+        rules:
+        - match:
+            prefix: /google
+          prefixRewrite: /

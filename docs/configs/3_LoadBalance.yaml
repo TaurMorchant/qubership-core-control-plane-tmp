@@ -1,0 +1,35 @@
+apiVersion: nc.core.mesh/v3
+kind: RouteConfiguration
+metadata:
+  name: quotation-engine-routes
+  namespace: cloud-core
+spec:
+  gateways: ["mesh-router"]
+  virtualServices:
+  - name: quotation-engine
+    routeConfiguration:
+      version: v1
+      routes:
+      - destination:
+          cluster: quotation-engine
+          endpoint: http://quotation-engine-v1:8080
+        rules:
+        - match:
+            prefix: /
+          prefixRewrite: /
+---
+apiVersion: nc.core.mesh/v2
+kind: LoadBalance
+metadata:
+  name: quot-eng-lb
+  namespace: cloud-core
+spec:
+  cluster: "quotation-engine"
+  version: "v1"
+  endpoint: http://quotation-engine-v1:8080
+  policies:
+    - header:
+        headerName: "BID"
+    - cookie:
+        name: "JSESSION"
+        ttl: 5

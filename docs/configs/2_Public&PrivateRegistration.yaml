@@ -1,0 +1,32 @@
+apiVersion: nc.core.mesh/v3
+kind: RouteConfiguration
+metadata:
+  name: tenant-manager-routes
+  namespace: cloud-core
+spec:
+  gateways: ["public-gateway-service"]
+  virtualServices:
+  - name: public-gateway-service
+    hosts: ["*"]
+    routeConfiguration:
+      version: v1
+      routes:
+      - destination:
+          cluster: tenant-manager
+          endpoint: http://tenant-manager-v1:8080
+        rules:
+        - match:
+            prefix: /api/v4/tenant-manager/public-api
+          prefixRewrite: /api/v4/api
+  - name: private-gateway-service
+    hosts: ["*"]
+    routeConfiguration:
+      version: v1
+      routes:
+      - destination:
+          cluster: tenant-manager
+          endpoint: http://tenant-manager-v1:8080
+        rules:
+        - match:
+            prefix: /api/v4/tenant-manager/private-api
+          prefixRewrite: /api/v4/api

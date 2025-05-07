@@ -1,0 +1,29 @@
+---
+apiVersion: nc.core.mesh/v3
+kind: TlsDef
+spec:
+  name: custom-cert
+  trustedForGateways:
+    - egress-gateway
+  tls:
+    enabled: true
+    insecure: false
+    sni: google.com
+    trustedCA: |
+      -----BEGIN CERTIFICATE-----
+      MIICyDCCAbCgAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl
+      cm5ldGVzMB4XDTIwMDcwNzExMDIwMFoXDTMwMDcwNTExMDIwMFowFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALu+
+      ufg5VVkefqzQFszAEl3CkkHmscOPJnn7HDG8iYqZjOLb8k1eStsHGnS39dMz2xK6
+      fgbZ8A1M0BVgbftguQX5+KB/dPaBkL5hSP6ScdQXRmsvwNLWSiE/mNfKICBdS685
+      MxiGyUjHuozGtcC+i8N+y5V9D1rzDxSJhra03oObexr46Wh1L32Zy8NCIu5FRgBY
+      Otwag59/VT17oiL8MXJexuSe/8lPzfX4Z3wVnCDT6axdtEQUiFQ4bCYELhQ8mrSa
+      /N32jX4F5QBmPfB2Ic6NRpdwIg/qWmKgGd3hX5Ke0UkmzM6gYXh8MpAlkSRuPpww
+      Kh/NylTO8FyWYNIhNPMCAwEAAaMjMCEwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB
+      /wQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEBABmMo9m27ujBjCaSTALzGl/LLstf
+      o1ryiQGjDoQq7VMuOldlEujP6Jii6MtJrot7ZH8o3U3OXbHfUFbSv/9A99x2i4NL
+      LWJ2fCOSev15AIhAsi1FElF9b+UK8ckQWJnHzO/ZXQVGs0BE4nwa9xJpiLeBGsQd
+      SXCg7hCti8EG6gHimJMmTot6UEbeuZ1DEJDeYNo4qBJMShpORUg6RSzPNb068cEC
+      RZ0yEkUCrS/EgFpV0+AtVF9y449cPRfbHDfc5oIOfsxYE5iyy84s4wuApSgyJ57S
+      I77Dk3uEyoQNdSVcX7oHxcYJzNYSqvyUqkeEtfgCgqVXtNEODMSiFGxjmlg=
+      -----END CERTIFICATE-----

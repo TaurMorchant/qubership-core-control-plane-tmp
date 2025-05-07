@@ -1,0 +1,50 @@
+@startuml
+
+title Problem with clustering \n **Now this approach is deprecated and not used!**
+
+skinparam sequenceMessageAlign center
+
+actor Client
+
+entity control_plane_pod_1
+entity control_plane_pod_2
+
+box "In-memory Storage"
+    database memdb_pod1
+    database memdb_pod2
+end box
+
+box "Global Storage" #lightblue
+    database PostgreSQL
+end box
+
+activate control_plane_pod_1
+    control_plane_pod_1-[hidden]->control_plane_pod_1
+
+    activate control_plane_pod_1 #LightGreen
+        control_plane_pod_2 -> control_plane_pod_2 : Start
+        activate control_plane_pod_2
+            Client -> control_plane_pod_1 : Register route
+            control_plane_pod_1 -> memdb_pod1 : Open DB Transaction
+        control_plane_pod_2 -> control_plane_pod_2 : Ready to work
+    deactivate control_plane_pod_1
+
+    activate control_plane_pod_2 #LightGreen
+        control_plane_pod_2 <--> PostgreSQL : Get current DB state
+        note right control_plane_pod_2
+            <color red>**! Problem: inconsistent state of DB**</color>
+            <color red>**  (transaction in first pod has not finished yet)**</color>
+        end note
+        control_plane_pod_2 -> memdb_pod2 : Set db state to inmemory DB
+        control_plane_pod_1 -> memdb_pod1 : Close DB Transaction
+        control_plane_pod_1 -> PostgreSQL : Flush transaction
+        control_plane_pod_2-[hidden]->control_plane_pod_2
+        Client -> control_plane_pod_2 : Register route
+        control_plane_pod_2-[hidden]->control_plane_pod_2
+        control_plane_pod_2-[hidden]->control_plane_pod_2
+    deactivate control_plane_pod_2
+
+    deactivate control_plane_pod_2
+deactivate control_plane_pod_1
+
+@enduml

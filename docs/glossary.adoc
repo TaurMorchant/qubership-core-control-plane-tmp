@@ -1,0 +1,27 @@
+= Glossary
+
+[[_version]]
+== Version
+Version is characteristic/label of application bundle. It's not the same version which was set by builder. This characteristic binds to bundle by Deployment Job and only you use the job in blue-green Deployment mode.
+Version in source code is represented by <<api/definitions.adoc#_deploymentversion, DeploymentVersion>>
+Version has several stages: <<_active, Active>>, <<_candidate, Candidate>>, <<_legacy, Legacy>>, <<_archived, Archived>>. Depending on stage gateways and facades do different routing strategies. Example of version values: 'v1', 'v2', 'v3', etc.
+
+[[_active]]
+== Active
+Entire user HTTP traffic directs to micro-services of application bundle which was labeled by Active version.
+
+[[_candidate]]
+== Candidate
+When your application bundle is labeled as Candidate that means only user traffic with header 'x-version: <label>' directs to micro-services of this bundle.
+For example your application bundle was labeled during deploy as 'v2' and its status is Candidate. In this case only requests with header 'x-version: v2' will route to micro-services of  'v2' bundle.
+
+[[_legacy]]
+== Legacy
+There is the same rules as at <<_candidate, Candidate>>.
+
+[[_archived]]
+== Archived
+When version of bundle become Archived micro-services will finish taking part in routing.
+
+[[_namespace]]
+== Namespace

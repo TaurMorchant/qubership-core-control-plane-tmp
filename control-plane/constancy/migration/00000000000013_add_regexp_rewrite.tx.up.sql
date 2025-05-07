@@ -1,0 +1,1 @@
+ALTER TABLE routes ADD COLUMN IF NOT EXISTS ra_regexpRewrite varchar(500);

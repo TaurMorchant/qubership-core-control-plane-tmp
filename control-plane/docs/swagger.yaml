@@ -1,0 +1,4019 @@
+definitions:
+  composite.Structure:
+    properties:
+      baseline:
+        type: string
+      satellites:
+        items:
+          type: string
+        type: array
+    type: object
+  configresources.ConfigResource:
+    properties:
+      apiVersion:
+        type: string
+      kind:
+        type: string
+      metadata:
+        $ref: '#/definitions/configresources.Metadata'
+      nodeGroup:
+        type: string
+      spec: {}
+    type: object
+  configresources.Metadata:
+    additionalProperties: true
+    type: object
+  domain.CircuitBreaker:
+    properties:
+      id:
+        type: integer
+      threshold:
+        $ref: '#/definitions/domain.Threshold'
+      thresholdId:
+        type: integer
+    type: object
+  domain.Cluster:
+    properties:
+      circuitBreaker:
+        $ref: '#/definitions/domain.CircuitBreaker'
+      circuitBreakerId:
+        type: integer
+      commonLbConfig:
+        $ref: '#/definitions/domain.CommonLbConfig'
+      dnsResolvers:
+        items:
+          $ref: '#/definitions/domain.DnsResolver'
+        type: array
+      enableH2:
+        type: boolean
+      endpoints:
+        items:
+          $ref: '#/definitions/domain.Endpoint'
+        type: array
+      healthChecks:
+        items:
+          $ref: '#/definitions/domain.HealthCheck'
+        type: array
+      httpVersion:
+        type: integer
+      id:
+        type: integer
+      lbPolicy:
+        type: string
+      name:
+        type: string
+      nodeGroups:
+        items:
+          $ref: '#/definitions/domain.NodeGroup'
+        type: array
+      tcpKeepalive:
+        $ref: '#/definitions/domain.TcpKeepalive'
+      tcpKeepaliveId:
+        type: integer
+      tlsConfigName:
+        $ref: '#/definitions/domain.TlsConfig'
+      tlsid:
+        type: integer
+      type:
+        type: string
+      version:
+        type: integer
+    type: object
+  domain.CommonLbConfig:
+    properties:
+      closeConnectionsOnHostSetChange:
+        type: boolean
+      consistentHashingLbConfig:
+        $ref: '#/definitions/domain.ConsistentHashingLbConfig'
+      healthyPanicThreshold:
+        type: number
+      id:
+        type: integer
+      ignoreNewHostsUntilFirstHc:
+        type: boolean
+      updateMergeWindow:
+        type: integer
+    type: object
+  domain.ConfigPriority:
+    enum:
+    - 0
+    - 1
+    type: integer
+    x-enum-varnames:
+    - Product
+    - Project
+  domain.ConsistentHashingLbConfig:
+    properties:
+      useHostnameForHashing:
+        type: boolean
+    type: object
+  domain.DeploymentVersion:
+    properties:
+      createdWhen:
+        type: string
+      stage:
+        type: string
+      updatedWhen:
+        type: string
+      version:
+        type: string
+    type: object
+  domain.DnsResolver:
+    properties:
+      socketAddress:
+        $ref: '#/definitions/domain.SocketAddress'
+    type: object
+  domain.Endpoint:
+    properties:
+      address:
+        type: string
+      cluster:
+        $ref: '#/definitions/domain.Cluster'
+      clusterId:
+        type: integer
+      deploymentVersion:
+        type: string
+      deploymentVersionVal:
+        $ref: '#/definitions/domain.DeploymentVersion'
+      hashPolicies:
+        items:
+          $ref: '#/definitions/domain.HashPolicy'
+        type: array
+      hostname:
+        type: string
+      id:
+        type: integer
+      initialDeploymentVersion:
+        type: string
+      orderId:
+        type: integer
+      port:
+        type: integer
+      protocol:
+        type: string
+      statefulSession:
+        $ref: '#/definitions/domain.StatefulSession'
+      statefulSessionId:
+        type: integer
+    type: object
+  domain.ExtAuthzFilter:
+    properties:
+      clusterName:
+        type: string
+      contextExtensions:
+        additionalProperties:
+          type: string
+        type: object
+      name:
+        type: string
+      nodeGroup:
+        type: string
+      timeout:
+        type: integer
+    type: object
+  domain.GatewayType:
+    enum:
+    - ingress
+    - egress
+    - mesh
+    type: string
+    x-enum-varnames:
+    - Ingress
+    - Egress
+    - Mesh
+  domain.HashPolicy:
+    properties:
+      cookieName:
+        type: string
+      cookiePath:
+        type: string
+      cookieTTL:
+        allOf:
+        - $ref: '#/definitions/domain.NullInt'
+        description: do not change the type. see above
+      endpoint:
+        $ref: '#/definitions/domain.Endpoint'
+      endpointId:
+        type: integer
+      headerName:
+        type: string
+      id:
+        type: integer
+      queryParamName:
+        type: string
+      queryParamSourceIP:
+        type: boolean
+      route:
+        $ref: '#/definitions/domain.Route'
+      routeId:
+        type: integer
+      terminal:
+        type: boolean
+    type: object
+  domain.Header:
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+    type: object
+  domain.HeaderMatcher:
+    properties:
+      exactMatch:
+        type: string
+      id:
+        type: integer
+      invertMatch:
+        type: boolean
+      name:
+        type: string
+      prefixMatch:
+        type: string
+      presentMatch:
+        type: boolean
+      rangeMatch:
+        $ref: '#/definitions/domain.RangeMatch'
+      safeRegexMatch:
+        type: string
+      suffixMatch:
+        type: string
+      version:
+        type: integer
+    type: object
+  domain.HealthCheck:
+    properties:
+      alwaysLogHealthCheckFailures:
+        type: boolean
+      cluster:
+        $ref: '#/definitions/domain.Cluster'
+      clusterId:
+        type: integer
+      eventLogPath:
+        type: string
+      healthyEdgeInterval:
+        type: integer
+      healthyThreshold:
+        type: integer
+      httpHealthCheck:
+        $ref: '#/definitions/domain.HttpHealthCheck'
+      id:
+        type: integer
+      initialJitter:
+        type: integer
+      interval:
+        type: integer
+      intervalJitter:
+        type: integer
+      intervalJitterPercent:
+        type: integer
+      noTrafficInterval:
+        type: integer
+      reuseConnection:
+        type: boolean
+      timeout:
+        type: integer
+      tlsOptions:
+        $ref: '#/definitions/domain.TlsOptions'
+      unhealthyEdgeInterval:
+        type: integer
+      unhealthyInterval:
+        type: integer
+      unhealthyThreshold:
+        type: integer
+    type: object
+  domain.HttpHealthCheck:
+    properties:
+      codecClientType:
+        type: string
+      expectedStatuses:
+        items:
+          $ref: '#/definitions/domain.RangeMatch'
+        type: array
+      healthCheck:
+        $ref: '#/definitions/domain.HealthCheck'
+      healthCheckId:
+        type: integer
+      host:
+        type: string
+      id:
+        type: integer
+      path:
+        type: string
+      requestHeadersToAdd:
+        items:
+          $ref: '#/definitions/domain.Header'
+        type: array
+      requestHeadersToRemove:
+        items:
+          type: string
+        type: array
+      useHttp2:
+        type: boolean
+    type: object
+  domain.Listener:
+    properties:
+      bindHost:
+        type: string
+      bindPort:
+        type: string
+      extAuthzFilter:
+        $ref: '#/definitions/domain.ExtAuthzFilter'
+      id:
+        type: integer
+      name:
+        type: string
+      nodeGroup:
+        type: string
+      routeConfigName:
+        type: string
+      version:
+        type: integer
+      wasmFilters:
+        items:
+          $ref: '#/definitions/domain.WasmFilter'
+        type: array
+      withTls:
+        type: boolean
+    type: object
+  domain.NodeGroup:
+    properties:
+      forbidVirtualHosts:
+        description: |-
+          ForbidVirtualHosts indicates whether registering virtual hosts for this gateway is forbidden.
+          Negative form is chosen to represent default value easily - `false` is default.
+        type: boolean
+      gatewayType:
+        $ref: '#/definitions/domain.GatewayType'
+      name:
+        type: string
+    type: object
+  domain.NullInt:
+    properties:
+      int64:
+        type: integer
+      valid:
+        description: Valid is true if Int64 is not NULL
+        type: boolean
+    type: object
+  domain.RangeMatch:
+    properties:
+      end:
+        type: integer
+      start:
+        type: integer
+    type: object
+  domain.RateLimit:
+    properties:
+      limitRequestsPerSecond:
+        type: integer
+      name:
+        type: string
+      priority:
+        $ref: '#/definitions/domain.ConfigPriority'
+    type: object
+  domain.RetryBackOff:
+    properties:
+      baseInterval:
+        type: integer
+      maxInterval:
+        type: integer
+    type: object
+  domain.RetryPolicy:
+    properties:
+      hostSelectionRetryMaxAttempts:
+        type: integer
+      id:
+        type: integer
+      numRetries:
+        type: integer
+      perTryTimeout:
+        type: integer
+      retriableStatusCodes:
+        items:
+          type: integer
+        type: array
+      retryBackOff:
+        $ref: '#/definitions/domain.RetryBackOff'
+      retryOn:
+        type: string
+      route:
+        $ref: '#/definitions/domain.Route'
+      routeId:
+        type: integer
+    type: object
+  domain.Route:
+    properties:
+      autogenerated:
+        type: boolean
+      clusterName:
+        type: string
+      deploymentVersion:
+        $ref: '#/definitions/domain.DeploymentVersion'
+      deploymentVersionString:
+        type: string
+      directResponseCode:
+        type: integer
+      fallback:
+        type: boolean
+      hashPolicies:
+        items:
+          $ref: '#/definitions/domain.HashPolicy'
+        type: array
+      headerMatchers:
+        items:
+          $ref: '#/definitions/domain.HeaderMatcher'
+        type: array
+      hostAutoRewrite:
+        type: boolean
+      hostRewrite:
+        type: string
+      hostRewriteLiteral:
+        type: string
+      id:
+        type: integer
+      idleTimeout:
+        type: integer
+      initialDeploymentVersion:
+        type: string
+      path:
+        type: string
+      pathRewrite:
+        type: string
+      prefix:
+        type: string
+      prefixRewrite:
+        type: string
+      rateLimit:
+        $ref: '#/definitions/domain.RateLimit'
+      rateLimitId:
+        type: string
+      regexp:
+        type: string
+      regexpRewrite:
+        type: string
+      requestHeadersToAdd:
+        items:
+          $ref: '#/definitions/domain.Header'
+        type: array
+      requestHeadersToRemove:
+        items:
+          type: string
+        type: array
+      retryPolicy:
+        $ref: '#/definitions/domain.RetryPolicy'
+      routeKey:
+        type: string
+      statefulSession:
+        $ref: '#/definitions/domain.StatefulSession'
+      statefulSessionId:
+        type: integer
+      timeout:
+        type: integer
+      uuid:
+        type: string
+      version:
+        type: integer
+      virtualHost:
+        $ref: '#/definitions/domain.VirtualHost'
+      virtualHostId:
+        type: integer
+    type: object
+  domain.RouteConfiguration:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      nodeGroup:
+        $ref: '#/definitions/domain.NodeGroup'
+      nodeGroupId:
+        type: string
+      version:
+        type: integer
+      virtualHosts:
+        items:
+          $ref: '#/definitions/domain.VirtualHost'
+        type: array
+    type: object
+  domain.SocketAddress:
+    properties:
+      address:
+        type: string
+      ipv4_compat:
+        type: boolean
+      port:
+        type: integer
+      protocol:
+        type: string
+    type: object
+  domain.StatefulSession:
+    properties:
+      clusterName:
+        description: 'ClusterName here is a microservice family name, NOT cluster
+          key: no port included! E.g. `trace-service`.'
+        type: string
+      cookieName:
+        type: string
+      cookiePath:
+        type: string
+      cookieTtl:
+        type: integer
+      deploymentVersion:
+        $ref: '#/definitions/domain.DeploymentVersion'
+      deploymentVersionString:
+        type: string
+      enabled:
+        type: boolean
+      gateways:
+        items:
+          type: string
+        type: array
+      id:
+        type: integer
+      initialDeploymentVersion:
+        type: string
+      namespace:
+        type: string
+    type: object
+  domain.TcpKeepalive:
+    properties:
+      id:
+        type: integer
+      interval:
+        type: integer
+      probes:
+        type: integer
+      time:
+        type: integer
+    type: object
+  domain.Threshold:
+    properties:
+      id:
+        type: integer
+      maxConnections:
+        type: integer
+    type: object
+  domain.TlsConfig:
+    properties:
+      client_cert:
+        type: string
+      enabled:
+        type: boolean
+      id:
+        type: integer
+      insecure:
+        type: boolean
+      name:
+        type: string
+      nodeGroups:
+        items:
+          $ref: '#/definitions/domain.NodeGroup'
+        type: array
+      private_key:
+        type: string
+      sni:
+        type: string
+      trusted_ca:
+        type: string
+    type: object
+  domain.TlsOptions:
+    properties:
+      alpn_protocols:
+        items:
+          type: string
+        type: array
+    type: object
+  domain.VirtualHost:
+    properties:
+      domains:
+        items:
+          $ref: '#/definitions/domain.VirtualHostDomain'
+        type: array
+      id:
+        type: integer
+      name:
+        type: string
+      rateLimit:
+        $ref: '#/definitions/domain.RateLimit'
+      rateLimitId:
+        type: string
+      requestHeadersToAdd:
+        items:
+          $ref: '#/definitions/domain.Header'
+        type: array
+      requestHeadersToRemove:
+        items:
+          type: string
+        type: array
+      routeConfiguration:
+        $ref: '#/definitions/domain.RouteConfiguration'
+      routeConfigurationId:
+        type: integer
+      routes:
+        items:
+          $ref: '#/definitions/domain.Route'
+        type: array
+      version:
+        type: integer
+    type: object
+  domain.VirtualHostDomain:
+    properties:
+      domain:
+        type: string
+      version:
+        type: integer
+      virtualHost:
+        $ref: '#/definitions/domain.VirtualHost'
+      virtualHostId:
+        type: integer
+    type: object
+  domain.WasmFilter:
+    properties:
+      id:
+        type: integer
+      listeners:
+        items:
+          $ref: '#/definitions/domain.Listener'
+        type: array
+      name:
+        type: string
+      params:
+        additionalProperties: true
+        type: object
+      sha256:
+        type: string
+      timeout:
+        type: integer
+      tlsConfigName:
+        type: string
+      url:
+        type: string
+    type: object
+  dto.ActiveDCsCommonLbConfigV3:
+    properties:
+      healthyPanicThreshold:
+        type: number
+    type: object
+  dto.ActiveDCsHealthCheckV3:
+    properties:
+      healthyThreshold:
+        type: integer
+      interval:
+        type: integer
+      noTrafficInterval:
+        type: integer
+      timeout:
+        type: integer
+      unhealthyInterval:
+        type: integer
+      unhealthyThreshold:
+        type: integer
+    type: object
+  dto.ActiveDCsRetryBackOffV3:
+    properties:
+      baseInterval:
+        type: integer
+      maxInterval:
+        type: integer
+    type: object
+  dto.ActiveDCsRetryPolicyV3:
+    properties:
+      numRetries:
+        type: integer
+      perTryTimeout:
+        type: integer
+      retriableStatusCodes:
+        items:
+          type: integer
+        type: array
+      retryBackOff:
+        $ref: '#/definitions/dto.ActiveDCsRetryBackOffV3'
+      retryOn:
+        type: string
+    type: object
+  dto.ActiveDCsV3:
+    properties:
+      commonLbConfig:
+        $ref: '#/definitions/dto.ActiveDCsCommonLbConfigV3'
+      healthCheck:
+        $ref: '#/definitions/dto.ActiveDCsHealthCheckV3'
+      httpPort:
+        type: integer
+      httpsPort:
+        type: integer
+      privateGwHosts:
+        items:
+          type: string
+        type: array
+      protocol:
+        type: string
+      publicGwHosts:
+        items:
+          type: string
+        type: array
+      retryPolicy:
+        $ref: '#/definitions/dto.ActiveDCsRetryPolicyV3'
+    type: object
+  dto.CircuitBreaker:
+    properties:
+      threshold:
+        $ref: '#/definitions/dto.Threshold'
+    type: object
+  dto.ClusterKeepAliveReq:
+    properties:
+      clusterKey:
+        type: string
+      tcpKeepalive:
+        $ref: '#/definitions/dto.TcpKeepalive'
+    type: object
+  dto.ClusterResponse:
+    properties:
+      enableH2:
+        type: boolean
+      endpoints:
+        items:
+          $ref: '#/definitions/dto.Endpoint'
+        type: array
+      id:
+        type: integer
+      lbPolicy:
+        type: string
+      name:
+        type: string
+      nodeGroups:
+        items:
+          $ref: '#/definitions/domain.NodeGroup'
+        type: array
+      type:
+        type: string
+      version:
+        type: integer
+    type: object
+  dto.ConnectionProperties:
+    properties:
+      sourceIp:
+        type: boolean
+    type: object
+  dto.Cookie:
+    properties:
+      name:
+        type: string
+      path:
+        type: string
+      ttl:
+        type: integer
+    type: object
+  dto.DirectResponseAction:
+    properties:
+      status:
+        type: integer
+    type: object
+  dto.DomainDeleteRequestV3:
+    properties:
+      domains:
+        items:
+          type: string
+        type: array
+      gateway:
+        type: string
+      virtualService:
+        type: string
+    type: object
+  dto.Endpoint:
+    properties:
+      address:
+        type: string
+      deploymentVersion:
+        $ref: '#/definitions/domain.DeploymentVersion'
+      hashPolicy:
+        items:
+          $ref: '#/definitions/dto.HashPolicy'
+        type: array
+      id:
+        type: integer
+      initialDeploymentVersion:
+        type: string
+      port:
+        type: integer
+    type: object
+  dto.EndpointDeleteItem:
+    properties:
+      address:
+        type: string
+      port:
+        type: integer
+    type: object
+  dto.EndpointDeleteRequest:
+    properties:
+      endpoints:
+        items:
+          $ref: '#/definitions/dto.EndpointDeleteItem'
+        type: array
+      version:
+        type: string
+    type: object
+  dto.ExtAuthz:
+    properties:
+      contextExtensions:
+        additionalProperties:
+          type: string
+        type: object
+      destination:
+        $ref: '#/definitions/dto.RouteDestination'
+      name:
+        type: string
+      timeout:
+        type: integer
+    type: object
+  dto.GatewayDeclaration:
+    properties:
+      allowVirtualHosts:
+        type: boolean
+      exists:
+        type: boolean
+      gatewayType:
+        $ref: '#/definitions/domain.GatewayType'
+      name:
+        type: string
+      overridden:
+        type: boolean
+    type: object
+  dto.HashPolicy:
+    properties:
+      connectionProperties:
+        $ref: '#/definitions/dto.ConnectionProperties'
+      cookie:
+        $ref: '#/definitions/dto.Cookie'
+      header:
+        $ref: '#/definitions/dto.Header'
+      id:
+        type: integer
+      queryParameter:
+        $ref: '#/definitions/dto.QueryParameter'
+      terminal:
+        type: boolean
+    type: object
+  dto.Header:
+    properties:
+      headerName:
+        type: string
+    type: object
+  dto.HeaderDefinition:
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+    type: object
+  dto.HeaderMatcher:
+    properties:
+      exactMatch:
+        type: string
+      invertMatch:
+        type: boolean
+      name:
+        type: string
+      prefixMatch:
+        type: string
+      presentMatch:
+        type: boolean
+      rangeMatch:
+        $ref: '#/definitions/dto.RangeMatch'
+      safeRegexMatch:
+        type: string
+      suffixMatch:
+        type: string
+    type: object
+  dto.HttpFiltersConfigRequestV3:
+    properties:
+      extAuthzFilter:
+        $ref: '#/definitions/dto.ExtAuthz'
+      gateways:
+        items:
+          type: string
+        type: array
+      overridden:
+        type: boolean
+      wasmFilters:
+        items:
+          $ref: '#/definitions/dto.WasmFilter'
+        type: array
+    type: object
+  dto.HttpFiltersDropConfigRequestV3:
+    properties:
+      extAuthzFilter:
+        $ref: '#/definitions/dto.ExtAuthz'
+      gateways:
+        items:
+          type: string
+        type: array
+      overridden:
+        type: boolean
+      wasmFilters:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+    type: object
+  dto.LoadBalanceSpec:
+    properties:
+      cluster:
+        type: string
+      endpoint:
+        type: string
+      namespace:
+        type: string
+      overridden:
+        type: boolean
+      policies:
+        items:
+          $ref: '#/definitions/dto.HashPolicy'
+        type: array
+      version:
+        type: string
+    type: object
+  dto.Microservice:
+    properties:
+      cluster:
+        type: string
+      endpoints:
+        items:
+          type: string
+        type: array
+      namespace:
+        type: string
+    type: object
+  dto.QueryParameter:
+    properties:
+      name:
+        type: string
+    type: object
+  dto.RangeMatch:
+    properties:
+      end:
+        type: integer
+      start:
+        type: integer
+    type: object
+  dto.RateLimit:
+    properties:
+      limitRequestPerSecond:
+        type: integer
+      name:
+        type: string
+      overridden:
+        type: boolean
+      priority:
+        type: string
+    type: object
+  dto.Route:
+    properties:
+      action:
+        $ref: '#/definitions/dto.RouteAction'
+      autoGenerated:
+        type: boolean
+      deploymentVersion:
+        $ref: '#/definitions/domain.DeploymentVersion'
+      directResponseAction:
+        $ref: '#/definitions/dto.DirectResponseAction'
+      hashPolicy:
+        items:
+          $ref: '#/definitions/dto.HashPolicy'
+        type: array
+      id:
+        type: integer
+      idleTimeout:
+        type: integer
+      initialDeploymentVersion:
+        type: string
+      matcher:
+        $ref: '#/definitions/dto.RouteMatcher'
+      routeKey:
+        type: string
+      timeout:
+        type: integer
+      uuid:
+        type: string
+      version:
+        type: integer
+    type: object
+  dto.RouteAction:
+    properties:
+      clusterName:
+        type: string
+      hostAutoRewrite:
+        type: boolean
+      hostRewrite:
+        type: string
+      pathRewrite:
+        type: string
+      prefixRewrite:
+        type: string
+      regexpRewrite:
+        type: string
+    type: object
+  dto.RouteConfig:
+    properties:
+      routes:
+        items:
+          $ref: '#/definitions/dto.RouteV3'
+        type: array
+      version:
+        type: string
+    type: object
+  dto.RouteConfigurationResponse:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      nodeGroup:
+        type: string
+      version:
+        type: integer
+      virtualHosts:
+        items:
+          $ref: '#/definitions/dto.VirtualHost'
+        type: array
+    type: object
+  dto.RouteDeleteItem:
+    properties:
+      prefix:
+        type: string
+    type: object
+  dto.RouteDeleteRequest:
+    properties:
+      namespace:
+        type: string
+      routes:
+        items:
+          $ref: '#/definitions/dto.RouteDeleteItem'
+        type: array
+      version:
+        type: string
+    type: object
+  dto.RouteDeleteRequestV3:
+    properties:
+      gateways:
+        items:
+          type: string
+        type: array
+      namespace:
+        type: string
+      overridden:
+        type: boolean
+      routes:
+        items:
+          $ref: '#/definitions/dto.RouteDeleteItem'
+        type: array
+      version:
+        type: string
+      virtualService:
+        type: string
+    type: object
+  dto.RouteDestination:
+    properties:
+      circuitBreaker:
+        $ref: '#/definitions/dto.CircuitBreaker'
+      cluster:
+        type: string
+      endpoint:
+        type: string
+      httpVersion:
+        type: integer
+      tcpKeepalive:
+        $ref: '#/definitions/dto.TcpKeepalive'
+      tlsConfigName:
+        type: string
+      tlsEndpoint:
+        type: string
+      tlsSupported:
+        type: boolean
+    type: object
+  dto.RouteEntityRequest:
+    properties:
+      allowed:
+        type: boolean
+      microserviceUrl:
+        type: string
+      routes:
+        items:
+          $ref: '#/definitions/dto.RouteEntry'
+        type: array
+    type: object
+  dto.RouteEntry:
+    properties:
+      from:
+        type: string
+      namespace:
+        type: string
+      timeout:
+        type: integer
+      to:
+        type: string
+      type:
+        type: string
+    type: object
+  dto.RouteItem:
+    properties:
+      headerMatchers:
+        items:
+          $ref: '#/definitions/dto.HeaderMatcher'
+        type: array
+      prefix:
+        type: string
+      prefixRewrite:
+        type: string
+      timeout:
+        type: integer
+    type: object
+  dto.RouteMatch:
+    properties:
+      headers:
+        items:
+          $ref: '#/definitions/dto.HeaderMatcher'
+        type: array
+      path:
+        type: string
+      prefix:
+        type: string
+      regExp:
+        type: string
+    type: object
+  dto.RouteMatcher:
+    properties:
+      addHeaders:
+        items:
+          $ref: '#/definitions/dto.HeaderDefinition'
+        type: array
+      headers:
+        items:
+          $ref: '#/definitions/domain.HeaderMatcher'
+        type: array
+      path:
+        type: string
+      prefix:
+        type: string
+      regExp:
+        type: string
+      removeHeaders:
+        items:
+          type: string
+        type: array
+    type: object
+  dto.RouteRegistrationRequest:
+    properties:
+      allowed:
+        type: boolean
+      cluster:
+        type: string
+      endpoint:
+        type: string
+      namespace:
+        type: string
+      overridden:
+        type: boolean
+      routes:
+        items:
+          $ref: '#/definitions/dto.RouteItem'
+        type: array
+      version:
+        type: string
+    type: object
+  dto.RouteV3:
+    properties:
+      destination:
+        $ref: '#/definitions/dto.RouteDestination'
+      rules:
+        items:
+          $ref: '#/definitions/dto.Rule'
+        type: array
+    type: object
+  dto.RoutingConfigRequestV3:
+    properties:
+      gateways:
+        items:
+          type: string
+        type: array
+      listenerPort:
+        type: integer
+      namespace:
+        type: string
+      overridden:
+        type: boolean
+      tlsSupported:
+        type: boolean
+      virtualServices:
+        items:
+          $ref: '#/definitions/dto.VirtualService'
+        type: array
+    type: object
+  dto.Rule:
+    properties:
+      addHeaders:
+        items:
+          $ref: '#/definitions/dto.HeaderDefinition'
+        type: array
+      allowed:
+        type: boolean
+      hostRewrite:
+        type: string
+      idleTimeout:
+        type: integer
+      match:
+        $ref: '#/definitions/dto.RouteMatch'
+      prefixRewrite:
+        type: string
+      rateLimit:
+        type: string
+      removeHeaders:
+        items:
+          type: string
+        type: array
+      statefulSession:
+        $ref: '#/definitions/dto.StatefulSession'
+      timeout:
+        type: integer
+    type: object
+  dto.ServicesVersionPayload:
+    properties:
+      exists:
+        description: |-
+          Exists indicates that it is CREATE request payload (not DELETE request). Field is optional and by default
+          request considered to be CREATE. Only explicit `false` value of this field will cause request to be
+          interpreted as DELETE.
+        type: boolean
+      namespace:
+        type: string
+      overridden:
+        type: boolean
+      services:
+        description: Services contains family names of the microservices being deployed
+        items:
+          type: string
+        type: array
+      version:
+        description: |-
+          Version holds blue-green version of microservices being registered (or deleted).
+          Empty version field means that deploy is performed in rolling mode => ACTIVE version should be used.
+        type: string
+    type: object
+  dto.StatefulSession:
+    properties:
+      cluster:
+        type: string
+      cookie:
+        $ref: '#/definitions/dto.Cookie'
+      enabled:
+        type: boolean
+      gateways:
+        items:
+          type: string
+        type: array
+      hostname:
+        type: string
+      namespace:
+        type: string
+      overridden:
+        type: boolean
+      port:
+        type: integer
+      route:
+        allOf:
+        - $ref: '#/definitions/dto.RouteMatcher'
+        description: Route is RO field to return in GET StatefulSession response.
+          Ignored in requests.
+      version:
+        type: string
+    type: object
+  dto.TcpKeepalive:
+    properties:
+      interval:
+        type: integer
+      probes:
+        type: integer
+      time:
+        type: integer
+    type: object
+  dto.Threshold:
+    properties:
+      maxConnections:
+        type: integer
+    type: object
+  dto.VersionInRegistry:
+    properties:
+      clusters:
+        items:
+          $ref: '#/definitions/dto.Microservice'
+        type: array
+      stage:
+        type: string
+      version:
+        type: string
+    type: object
+  dto.VirtualHost:
+    properties:
+      addHeaders:
+        items:
+          $ref: '#/definitions/dto.HeaderDefinition'
+        type: array
+      domains:
+        items:
+          type: string
+        type: array
+      id:
+        type: integer
+      name:
+        type: string
+      removeHeaders:
+        items:
+          type: string
+        type: array
+      routes:
+        items:
+          $ref: '#/definitions/dto.Route'
+        type: array
+      version:
+        type: integer
+    type: object
+  dto.VirtualService:
+    properties:
+      addHeaders:
+        items:
+          $ref: '#/definitions/dto.HeaderDefinition'
+        type: array
+      hosts:
+        items:
+          type: string
+        type: array
+      name:
+        type: string
+      overridden:
+        type: boolean
+      rateLimit:
+        type: string
+      removeHeaders:
+        items:
+          type: string
+        type: array
+      routeConfiguration:
+        $ref: '#/definitions/dto.RouteConfig'
+    type: object
+  dto.VirtualServiceResponse:
+    properties:
+      clusters:
+        items:
+          $ref: '#/definitions/dto.ClusterResponse'
+        type: array
+      virtualHost:
+        $ref: '#/definitions/dto.VirtualHost'
+    type: object
+  dto.WasmFilter:
+    properties:
+      name:
+        type: string
+      params:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      sha256:
+        type: string
+      timeout:
+        type: integer
+      tlsConfigName:
+        type: string
+      url:
+        type: string
+    type: object
+  errorcodes.CpErrCodeError:
+    properties:
+      cause: {}
+      detail:
+        type: string
+      errorCode:
+        $ref: '#/definitions/errors.ErrorCode'
+      id:
+        type: string
+      name:
+        type: string
+      stackTrace:
+        items:
+          type: integer
+        type: array
+    type: object
+  errors.ErrorCode:
+    properties:
+      code:
+        type: string
+      title:
+        type: string
+    type: object
+  routingmode.RoutingMode:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    type: integer
+    x-enum-varnames:
+    - SIMPLE
+    - NAMESPACED
+    - VERSIONED
+    - MIXED
+  routingmode.Summary:
+    properties:
+      routeKeys:
+        items:
+          type: string
+        type: array
+      routingMode:
+        $ref: '#/definitions/routingmode.RoutingMode'
+    type: object
+  ui.BalancingPolicy:
+    properties:
+      connectionProperties:
+        $ref: '#/definitions/ui.ConnectionProperties'
+      cookie:
+        $ref: '#/definitions/ui.Cookie'
+      header:
+        $ref: '#/definitions/ui.Header'
+      id:
+        type: integer
+      queryParameter:
+        $ref: '#/definitions/ui.QueryParameter'
+      terminal:
+        type: boolean
+    type: object
+  ui.CertificateDetails:
+    properties:
+      certificateCommonName:
+        type: string
+      certificateId:
+        type: string
+      daysTillExpiry:
+        type: integer
+      issuerCertificateCommonName:
+        type: string
+      issuerCertificateId:
+        type: string
+      reason:
+        type: string
+      sans:
+        items:
+          type: string
+        type: array
+      valid:
+        type: boolean
+      validFrom:
+        type: string
+      validTill:
+        type: string
+    type: object
+  ui.CertificateDetailsResponse:
+    properties:
+      details:
+        items:
+          $ref: '#/definitions/ui.TlsDefDetails'
+        type: array
+    type: object
+  ui.CertificateUsedIn:
+    properties:
+      clusters:
+        items:
+          $ref: '#/definitions/ui.CertificateUsedInCluster'
+        type: array
+      gateway:
+        type: string
+    type: object
+  ui.CertificateUsedInCluster:
+    properties:
+      endpoints:
+        items:
+          type: string
+        type: array
+      name:
+        type: string
+    type: object
+  ui.Cluster:
+    properties:
+      deploymentVersions:
+        items:
+          $ref: '#/definitions/ui.DeploymentVersionsExt'
+        type: array
+      enableH2:
+        type: boolean
+      id:
+        type: integer
+      name:
+        type: string
+      nodeGroups:
+        items:
+          $ref: '#/definitions/ui.NodeGroup'
+        type: array
+    type: object
+  ui.ConnectionProperties:
+    properties:
+      sourceIp:
+        type: boolean
+    type: object
+  ui.Cookie:
+    properties:
+      name:
+        type: string
+      path:
+        type: string
+      ttl:
+        type: integer
+    type: object
+  ui.DeploymentVersion:
+    properties:
+      name:
+        type: string
+      stage:
+        type: string
+    type: object
+  ui.DeploymentVersionsExt:
+    properties:
+      balancingPolicies:
+        items:
+          $ref: '#/definitions/ui.BalancingPolicy'
+        type: array
+      endpoint:
+        $ref: '#/definitions/ui.Endpoint'
+      name:
+        type: string
+      stage:
+        type: string
+    type: object
+  ui.Endpoint:
+    properties:
+      address:
+        type: string
+      id:
+        type: integer
+      port:
+        type: integer
+    type: object
+  ui.Header:
+    properties:
+      headerName:
+        type: string
+    type: object
+  ui.HeaderMatcher:
+    properties:
+      exactMatch:
+        type: string
+      invertMatch:
+        type: boolean
+      name:
+        type: string
+      prefixMatch:
+        type: string
+      presentMatch:
+        type: boolean
+      rangeMatch:
+        $ref: '#/definitions/ui.RangeMatch'
+      safeRegexMatch:
+        type: string
+      suffixMatch:
+        type: string
+    type: object
+  ui.HeaderToAdd:
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+    type: object
+  ui.NodeGroup:
+    properties:
+      name:
+        type: string
+    type: object
+  ui.PageRoutes:
+    properties:
+      nodeGroup:
+        type: string
+      routes:
+        items:
+          $ref: '#/definitions/ui.Route'
+        type: array
+      totalCount:
+        type: integer
+      versionName:
+        type: string
+      versionStage:
+        type: string
+      virtualHostName:
+        type: string
+    type: object
+  ui.QueryParameter:
+    properties:
+      name:
+        type: string
+    type: object
+  ui.RangeMatch:
+    properties:
+      end:
+        type: integer
+      start:
+        type: integer
+    type: object
+  ui.Route:
+    properties:
+      allowed:
+        type: boolean
+      clusterName:
+        type: string
+      match:
+        type: string
+      matchRewrite:
+        type: string
+      uuid:
+        type: string
+    type: object
+  ui.RouteDetails:
+    properties:
+      clusterName:
+        type: string
+      directResponse:
+        type: integer
+      endpoint:
+        type: string
+      headerMatchers:
+        items:
+          $ref: '#/definitions/ui.HeaderMatcher'
+        type: array
+      hostAutoRewrite:
+        type: boolean
+      hostRewrite:
+        type: string
+      idleTimeout:
+        type: integer
+      path:
+        type: string
+      pathRewrite:
+        type: string
+      prefix:
+        type: string
+      prefixRewrite:
+        type: string
+      regexp:
+        type: string
+      regexpRewrite:
+        type: string
+      requestHeadersToAdd:
+        items:
+          $ref: '#/definitions/ui.HeaderToAdd'
+        type: array
+      requestHeadersToRemove:
+        items:
+          type: string
+        type: array
+      timeout:
+        type: integer
+    type: object
+  ui.SimplifiedRouteConfig:
+    properties:
+      nodeGroup:
+        type: string
+      virtualHosts:
+        items:
+          $ref: '#/definitions/ui.VirtualHost'
+        type: array
+    type: object
+  ui.TlsDefDetails:
+    properties:
+      certificates:
+        items:
+          $ref: '#/definitions/ui.CertificateDetails'
+        type: array
+      endpoints:
+        items:
+          type: string
+        type: array
+      name:
+        type: string
+      usedIn:
+        items:
+          $ref: '#/definitions/ui.CertificateUsedIn'
+        type: array
+    type: object
+  ui.VirtualHost:
+    properties:
+      deploymentVersions:
+        items:
+          $ref: '#/definitions/ui.DeploymentVersion'
+        type: array
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  v3.ApplyResult:
+    properties:
+      request:
+        $ref: '#/definitions/configresources.ConfigResource'
+      response:
+        $ref: '#/definitions/v3.HandlingResponse'
+    type: object
+  v3.HandlingResponse:
+    properties:
+      code:
+        type: integer
+      data: {}
+      error: {}
+    type: object
+info:
+  contact:
+  description: Control-plane is a central microservice of Service Mesh which is responsible
+    for all the gateways configuration.
+  title: Control Plane API
+  version: "2.0"
+paths:
+  /api/v1/routes/{nodeGroup}:
+    delete:
+      description: Delete Routes With Node Group V1
+      operationId: DeleteRoutesWithNodeGroupV1
+      parameters:
+      - description: nodeGroup
+        in: path
+        name: nodeGroup
+        required: true
+        type: string
+      - description: from
+        in: query
+        name: from
+        type: string
+      - description: namespace
+        in: query
+        name: namespace
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            items:
+              $ref: '#/definitions/domain.Route'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Routes With Node Group V1
+      tags:
+      - routes-controller-v1
+    post:
+      description: Post Routes With NodeGroup
+      operationId: RoutesWithNodeGroup
+      parameters:
+      - description: nodeGroup
+        in: path
+        name: nodeGroup
+        required: true
+        type: string
+      - description: RouteEntityRequest
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RouteEntityRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Routes With Node Group
+      tags:
+      - routes-controller-v1
+  /api/v1/routes/clusters:
+    get:
+      description: Get Clusters
+      operationId: GetClusters
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.ClusterResponse'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get Clusters
+      tags:
+      - routes-controller-v1
+  /api/v1/routes/clusters/{clusterId}:
+    delete:
+      description: Delete Cluster With ID
+      operationId: DeleteClusterWithID
+      parameters:
+      - description: clusterId
+        in: path
+        name: clusterId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Cluster With ID
+      tags:
+      - routes-controller-v1
+  /api/v1/routes/listeners:
+    get:
+      description: Get route listeners
+      operationId: GetListeners
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.Listener'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get route listeners
+      tags:
+      - routes-controller-v1
+  /api/v1/routes/node-groups:
+    get:
+      description: Get route node-groups
+      operationId: GetNodeGroups
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.NodeGroup'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get route node-groups
+      tags:
+      - routes-controller-v1
+  /api/v1/routes/route-configs:
+    get:
+      description: Get route configs
+      operationId: GetRouteConfigs
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.RouteConfigurationResponse'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get route configs
+      tags:
+      - routes-controller-v1
+  /api/v2/control-plane/endpoints:
+    delete:
+      description: Delete Endpoints V2
+      operationId: DeleteEndpoints
+      parameters:
+      - description: EndpointDeleteRequest
+        in: body
+        name: request
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/dto.EndpointDeleteRequest'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.Endpoint'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Endpoints V2
+      tags:
+      - control-plane-v2
+  /api/v2/control-plane/load-balance:
+    post:
+      description: Post Load Balance V2
+      operationId: PostLoadBalanceV2
+      parameters:
+      - description: loadBalanceSpec
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LoadBalanceSpec'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Post Load Balance V2
+      tags:
+      - control-plane-v2
+  /api/v2/control-plane/promote/{version}:
+    post:
+      description: Post Promote Version
+      operationId: PostPromoteVersionV2
+      parameters:
+      - description: version
+        in: path
+        name: version
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted
+          schema:
+            items:
+              $ref: '#/definitions/domain.DeploymentVersion'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Post Promote Version
+      tags:
+      - control-plane-v2
+  /api/v2/control-plane/rollback:
+    post:
+      description: Post Rollback VersionV2
+      operationId: PostRollbackVersionV2
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted
+          schema:
+            items:
+              $ref: '#/definitions/domain.DeploymentVersion'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "409":
+          description: Conflict
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Post Rollback VersionV2
+      tags:
+      - control-plane-v2
+  /api/v2/control-plane/routes:
+    delete:
+      description: DeleteRoutes
+      operationId: DeleteRoutes
+      parameters:
+      - description: RouteDeleteRequest
+        in: body
+        name: request
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/dto.RouteDeleteRequest'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.Route'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: DeleteRoutes
+      tags:
+      - control-plane-v2
+  /api/v2/control-plane/routes/{nodeGroup}:
+    delete:
+      description: Delete Routes With Node Group V2
+      operationId: DeleteRoutesWithNodeGroupV2
+      parameters:
+      - description: nodeGroup
+        in: path
+        name: nodeGroup
+        required: true
+        type: string
+      - description: RouteDeleteRequest
+        in: body
+        name: request
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/dto.RouteDeleteRequest'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.Route'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Routes With Node Group V2
+      tags:
+      - control-plane-v2
+    post:
+      description: Post Routes With Node Group
+      operationId: PostRoutesWithNodeGroup
+      parameters:
+      - description: nodeGroup
+        in: path
+        name: nodeGroup
+        required: true
+        type: string
+      - description: RouteRegistrationRequest
+        in: body
+        name: request
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/dto.RouteRegistrationRequest'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Post Routes With Node Group
+      tags:
+      - control-plane-v2
+  /api/v2/control-plane/routes/uuid/{uuid}:
+    delete:
+      description: Delete Route With UUID
+      operationId: DeleteRouteWithUUID
+      parameters:
+      - description: uuid
+        in: path
+        name: uuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Route'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Route With UUID
+      tags:
+      - control-plane-v2
+  /api/v2/control-plane/routing/details:
+    get:
+      description: Get Routing Mode Details
+      operationId: GetRoutingModeDetailsV2
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/routingmode.Summary'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Get Routing Mode Details
+      tags:
+      - control-plane-v2
+  /api/v2/control-plane/versions:
+    get:
+      description: Get Deployment Versions
+      operationId: GetDeploymentVersionsV2
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.DeploymentVersion'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get Deployment Versions
+      tags:
+      - control-plane-v2
+  /api/v2/control-plane/versions/{version}:
+    delete:
+      description: Delete Deployment Version With ID V2
+      operationId: DeleteDeploymentVersionWithIDV2
+      parameters:
+      - description: version
+        in: path
+        name: version
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.DeploymentVersion'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Deployment Version With ID V2
+      tags:
+      - control-plane-v2
+  /api/v2/control-plane/versions/watch:
+    get:
+      description: Handle Versions V2 Watch
+      operationId: HandleVersionsWatchv2
+      parameters:
+      - description: Connection
+        in: header
+        name: Connection
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "405":
+          description: Method Not Allowed
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Handle Versions V2 Watch
+      tags:
+      - control-plane-v2
+  /api/v3/active-active:
+    delete:
+      description: Active Config Delete
+      operationId: ActiveActiveConfigDelete
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Active Config Delete
+      tags:
+      - control-plane-v3
+    post:
+      description: Active Config Post
+      operationId: ActiveActiveConfigPost
+      parameters:
+      - description: ActiveDCsV3
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ActiveDCsV3'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Active Config Post
+      tags:
+      - control-plane-v3
+  /api/v3/active-active/watch:
+    get:
+      description: Active Watch
+      operationId: HandleActiveActiveWatch
+      parameters:
+      - description: Connection
+        in: header
+        name: Connection
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "405":
+          description: Method Not Allowed
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Active Watch
+      tags:
+      - control-plane-v3
+  /api/v3/apply-config:
+    post:
+      description: Post Apply Config
+      operationId: HandlePostConfig
+      parameters:
+      - description: ConfigResource
+        in: body
+        name: request
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/configresources.ConfigResource'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/v3.ApplyResult'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errorcodes.CpErrCodeError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/errorcodes.CpErrCodeError'
+      security:
+      - ApiKeyAuth: []
+      summary: Post Apply Config
+      tags:
+      - control-plane-v3
+  /api/v3/clusters/tcp-keepalive:
+    post:
+      description: Post Cluster TCP keepalive
+      operationId: PostClusterTcpKeepAlive
+      parameters:
+      - description: ClusterTcpKeepAlive
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ClusterKeepAliveReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Post Cluster TCP keepalive
+      tags:
+      - control-plane-v3
+  /api/v3/composite-platform/namespaces:
+    get:
+      description: Get Composite Structure
+      operationId: HandleGetCompositeStructure
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/composite.Structure'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get Composite Structure
+      tags:
+      - control-plane-v3
+  /api/v3/composite-platform/namespaces/{namespace}:
+    delete:
+      description: Remove Namespace From Composite
+      operationId: RemoveNamespaceFromComposite
+      parameters:
+      - description: namespace
+        in: path
+        name: namespace
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Remove Namespace From Composite
+      tags:
+      - control-plane-v3
+    post:
+      description: Add Namespace To Composite
+      operationId: AddNamespaceToComposite
+      parameters:
+      - description: namespace
+        in: path
+        name: namespace
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Add Namespace To Composite
+      tags:
+      - control-plane-v3
+  /api/v3/config:
+    post:
+      description: Apply Config
+      operationId: HandleConfig
+      parameters:
+      - description: ConfigResource
+        in: body
+        name: request
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/configresources.ConfigResource'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/v3.ApplyResult'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/errorcodes.CpErrCodeError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/errorcodes.CpErrCodeError'
+      security:
+      - ApiKeyAuth: []
+      summary: Apply Config
+      tags:
+      - control-plane-v3
+  /api/v3/debug/config-validation:
+    get:
+      description: Get config validation report
+      operationId: GetConfigValidation
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get config validation report
+      tags:
+      - control-plane-v3
+  /api/v3/debug/internal/dump:
+    get:
+      description: Get mesh dump registry
+      operationId: GetMeshDump
+      produces:
+      - application/json
+      - application/zip
+      responses:
+        "200":
+          description: ZIP file
+          schema:
+            type: file
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get mesh dump registry
+      tags:
+      - control-plane-v3
+  /api/v3/domains:
+    delete:
+      description: Delete Virtual Service Domains
+      operationId: DeleteVirtualServiceDomains
+      parameters:
+      - description: DomainDeleteRequestV3
+        in: body
+        name: request
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/dto.DomainDeleteRequestV3'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Virtual Service Domains
+      tags:
+      - control-plane-v3
+  /api/v3/endpoints:
+    delete:
+      description: Delete Endpoints V3
+      operationId: HandleDeleteEndpointsV3
+      parameters:
+      - description: EndpointDeleteRequest
+        in: body
+        name: request
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/dto.EndpointDeleteRequest'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.Endpoint'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Endpoints V3
+      tags:
+      - control-plane-v3
+  /api/v3/gateways/specs:
+    delete:
+      description: Delete Gateway Specs
+      operationId: DeleteGatewaySpecs
+      parameters:
+      - description: GatewayDeclaration
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.GatewayDeclaration'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Gateway Specs
+      tags:
+      - control-plane-v3
+    get:
+      description: Get Gateway Specs
+      operationId: GetGatewaySpecs
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              items:
+                $ref: '#/definitions/dto.GatewayDeclaration'
+              type: array
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get Gateway Specs
+      tags:
+      - control-plane-v3
+    post:
+      description: Post Gateway Specs
+      operationId: PostGatewaySpecs
+      parameters:
+      - description: GatewayDeclaration
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.GatewayDeclaration'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Post Gateway Specs
+      tags:
+      - control-plane-v3
+  /api/v3/http-filters:
+    delete:
+      description: Delete HTTP Filters
+      operationId: DeleteHttpFilters
+      parameters:
+      - description: HttpFiltersDropConfigRequestV3
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.HttpFiltersDropConfigRequestV3'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete HTTP Filters
+      tags:
+      - control-plane-v3
+    post:
+      description: Post HTTP Filters
+      operationId: PostHttpFilters
+      parameters:
+      - description: HttpFiltersConfigRequestV3
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.HttpFiltersConfigRequestV3'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Post HTTP Filters
+      tags:
+      - control-plane-v3
+  /api/v3/http-filters/{nodeGroup}:
+    get:
+      description: Get HTTP Filters
+      operationId: GetHttpFilters
+      parameters:
+      - description: nodeGroup
+        in: path
+        name: nodeGroup
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.HttpFiltersConfigRequestV3'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get HTTP Filters
+      tags:
+      - control-plane-v3
+  /api/v3/load-balance:
+    post:
+      description: Post Load Balance V3
+      operationId: PostLoadBalanceV3
+      parameters:
+      - description: LoadBalanceSpec
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LoadBalanceSpec'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Post Load Balance V3
+      tags:
+      - control-plane-v3
+  /api/v3/load-balance/stateful-session:
+    delete:
+      description: Delete Stateful Session
+      operationId: DeleteStatefulSession
+      parameters:
+      - description: StatefulSession
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.StatefulSession'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Stateful Session
+      tags:
+      - control-plane-v3
+    get:
+      description: Get Stateful Sessions
+      operationId: GetStatefulSessions
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.StatefulSession'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get Stateful Sessions
+      tags:
+      - control-plane-v3
+    post:
+      description: Post Stateful Session
+      operationId: PostStatefulSession
+      parameters:
+      - description: StatefulSession
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.StatefulSession'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Post Stateful Session
+      tags:
+      - control-plane-v3
+    put:
+      description: Put Stateful Session
+      operationId: PutStatefulSession
+      parameters:
+      - description: StatefulSession
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.StatefulSession'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Put Stateful Session
+      tags:
+      - control-plane-v3
+  /api/v3/promote/{version}:
+    post:
+      description: Post Promote Version
+      operationId: PostPromoteVersionV3
+      parameters:
+      - description: version
+        in: path
+        name: version
+        required: true
+        type: string
+      - description: archiveSize
+        in: query
+        name: archiveSize
+        type: string
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted
+          schema:
+            items:
+              $ref: '#/definitions/domain.DeploymentVersion'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Post Promote Version
+      tags:
+      - control-plane-v3
+  /api/v3/rate-limits:
+    delete:
+      description: Delete Rate Limit
+      operationId: DeleteRateLimit
+      parameters:
+      - description: RateLimit
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RateLimit'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Rate Limit
+      tags:
+      - control-plane-v3
+    get:
+      description: Get Rate Limit
+      operationId: GetRateLimit
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.RateLimit'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get Rate Limit
+      tags:
+      - control-plane-v3
+    post:
+      description: Post Rate Limit
+      operationId: PostRateLimit
+      parameters:
+      - description: RateLimit
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RateLimit'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Post Rate Limit
+      tags:
+      - control-plane-v3
+  /api/v3/rollback:
+    post:
+      description: Post Rollback Version
+      operationId: PostRollbackVersion
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted
+          schema:
+            items:
+              $ref: '#/definitions/domain.DeploymentVersion'
+            type: array
+        "409":
+          description: Conflict
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Post Rollback Version
+      tags:
+      - control-plane-v3
+  /api/v3/routes:
+    delete:
+      description: Delete Virtual Service Routes
+      operationId: DeleteVirtualServiceRoutes
+      parameters:
+      - description: RouteDeleteRequestV3
+        in: body
+        name: request
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/dto.RouteDeleteRequestV3'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.Route'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Virtual Service Routes
+      tags:
+      - control-plane-v3
+    post:
+      description: Post Routing Config
+      operationId: PostRoutingConfig
+      parameters:
+      - description: RoutingConfigRequestV3
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RoutingConfigRequestV3'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Post Routing Config
+      tags:
+      - control-plane-v3
+  /api/v3/routes/{nodeGroup}/{virtualServiceName}:
+    delete:
+      description: Delete Virtual Service
+      operationId: DeleteVirtualService
+      parameters:
+      - description: nodeGroup
+        in: path
+        name: nodeGroup
+        required: true
+        type: string
+      - description: virtualServiceName
+        in: path
+        name: virtualServiceName
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Virtual Service
+      tags:
+      - control-plane-v3
+    get:
+      description: Get Virtual Service
+      operationId: GetVirtualService
+      parameters:
+      - description: nodeGroup
+        in: path
+        name: nodeGroup
+        required: true
+        type: string
+      - description: virtualServiceName
+        in: path
+        name: virtualServiceName
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.VirtualServiceResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get Virtual Service
+      tags:
+      - control-plane-v3
+    post:
+      description: Create Virtual Service
+      operationId: CreateVirtualService
+      parameters:
+      - description: nodeGroup
+        in: path
+        name: nodeGroup
+        required: true
+        type: string
+      - description: virtualServiceName
+        in: path
+        name: virtualServiceName
+        required: true
+        type: string
+      - description: VirtualService
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.VirtualService'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Create Virtual Service
+      tags:
+      - control-plane-v3
+    put:
+      description: Put Virtual Service
+      operationId: PutVirtualService
+      parameters:
+      - description: nodeGroup
+        in: path
+        name: nodeGroup
+        required: true
+        type: string
+      - description: virtualServiceName
+        in: path
+        name: virtualServiceName
+        required: true
+        type: string
+      - description: VirtualService
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.VirtualService'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Put Virtual Service
+      tags:
+      - control-plane-v3
+  /api/v3/routing/details:
+    get:
+      description: Get Routing Mode Details
+      operationId: GetRoutingModeDetails
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              type: integer
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get Routing Mode Details
+      tags:
+      - control-plane-v3
+  /api/v3/tls/details:
+    get:
+      description: Capture certificates detals
+      operationId: CetrificateDetails
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ui.CertificateDetailsResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Capture certificates detals
+      tags:
+      - control-plane-v3
+  /api/v3/ui/{virtualHostId}/{versionId}/routes:
+    get:
+      description: Get Routes
+      operationId: GetRoutes
+      parameters:
+      - description: versionId
+        in: path
+        name: versionId
+        required: true
+        type: string
+      - description: virtualHostId
+        in: path
+        name: virtualHostId
+        required: true
+        type: string
+      - description: page
+        in: query
+        name: page
+        type: string
+      - description: size
+        in: query
+        name: size
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ui.PageRoutes'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get Routes
+      tags:
+      - control-plane-v3
+  /api/v3/ui/cloud-config:
+    get:
+      description: Get Cloud Config
+      operationId: GetCloudConfig
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ui.SimplifiedRouteConfig'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get Cloud Config
+      tags:
+      - control-plane-v3
+  /api/v3/ui/clusters:
+    get:
+      description: Get Clusters V3
+      operationId: GetClustersV3
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ui.Cluster'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get Clusters V3
+      tags:
+      - control-plane-v3
+  /api/v3/ui/route/{routeUuid}/details:
+    get:
+      description: Get Route Details
+      operationId: GetRouteDetails
+      parameters:
+      - description: routeUuid
+        in: path
+        name: routeUuid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ui.RouteDetails'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get Route Details
+      tags:
+      - control-plane-v3
+  /api/v3/versions:
+    get:
+      description: Get Deployment Versions
+      operationId: GetDeploymentVersionsV3
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.DeploymentVersion'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get Deployment Versions
+      tags:
+      - control-plane-v3
+  /api/v3/versions/{version}:
+    delete:
+      description: Delete Deployment Version With ID
+      operationId: DeleteDeploymentVersionWithIDV3
+      parameters:
+      - description: version
+        in: path
+        name: version
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.DeploymentVersion'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Deployment Version With ID
+      tags:
+      - control-plane-v3
+  /api/v3/versions/microservices/{microservice}:
+    get:
+      description: Get Microservice Version
+      operationId: GetMicroserviceVersion
+      parameters:
+      - description: microservice
+        in: path
+        name: microservice
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get Microservice Version
+      tags:
+      - control-plane-v3
+  /api/v3/versions/registry:
+    get:
+      description: Get Microservice Versions from BG versions registry. Not every
+        combination of the request params allowed,
+      operationId: GetMicroserviceVersions
+      parameters:
+      - description: version
+        in: query
+        name: version
+        type: string
+      - description: initialVersion
+        in: query
+        name: initialVersion
+        type: string
+      - description: serviceName
+        in: query
+        name: serviceName
+        type: string
+      - description: namespace
+        in: query
+        name: namespace
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.VersionInRegistry'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get Microservice Versions from BG versions registry
+      tags:
+      - control-plane-v3
+    post:
+      description: Register Microservice Versions in BG versions registry.
+      operationId: PostMicroserviceVersions
+      parameters:
+      - description: ServicesVersionPayload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ServicesVersionPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Register Microservice Versions in BG versions registry.
+      tags:
+      - control-plane-v3
+  /api/v3/versions/registry/services:
+    delete:
+      description: Delete Microservice Versions from BG versions registry.
+      operationId: DeleteMicroserviceVersions
+      parameters:
+      - description: ServicesVersionPayload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ServicesVersionPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Microservice Versions from BG versions registry.
+      tags:
+      - control-plane-v3
+  /api/v3/versions/watch:
+    get:
+      description: Handle Versions V3 Watch
+      operationId: HandleVersionsWatch
+      parameters:
+      - description: Connection
+        in: header
+        name: Connection
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "405":
+          description: Method Not Allowed
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Handle Versions V3 Watch
+      tags:
+      - control-plane-v3
+  /debug/data-dump:
+    get:
+      description: Get dump registry
+      operationId: GetDump
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Get dump registry
+      tags:
+      - control-plane-v3
+produces:
+- application/json
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
+tags:
+- description: routing operations for v1 apis
+  name: routes-controller-v1
+- description: routing operations for v2 apis
+  name: control-plane-v2
+- description: routing operations for v3 apis
+  name: control-plane-v3

@@ -1,0 +1,1 @@
+ALTER TABLE listeners ADD COLUMN IF NOT EXISTS withtls boolean default false;

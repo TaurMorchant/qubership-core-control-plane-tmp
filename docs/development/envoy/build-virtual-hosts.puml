@@ -1,0 +1,52 @@
+@startuml
+
+skinparam sequenceMessageAlign center
+
+entity EnvoyConfigBuilder
+entity VirtualHostBuilder
+entity RouteBuilder
+entity InMemRepo
+
+EnvoyConfigBuilder -> VirtualHostBuilder : BuildVirtualHosts(routeConfig.VirtualHosts)
+activate VirtualHostBuilder
+    loop each virtual host
+        VirtualHostBuilder <--> InMemRepo : get related domains
+        VirtualHostBuilder -> VirtualHostBuilder : fill virtual host with domains
+
+
+        VirtualHostBuilder <--> InMemRepo : <color GREEN>**get related RateLimit by name which specified in virtual host**</color>
+        VirtualHostBuilder -> VirtualHostBuilder : <color GREEN>**fill virtual host with RateLimitFilter (envoy.filters.http.local_ratelimit)**</color>
+        note right VirtualHostBuilder
+            <color GREEN>**extensions.filters.http.local_ratelimit.v3.LocalRateLimit{**</color>
+            <color GREEN>**"stat_prefix": "name_of_rate_limit",**</color>
+            <color GREEN>**"token_bucket": "{**</color>
+                <color GREEN>**"max_tokens": "limit_request_per_second", **</color>
+                <color GREEN>**"tokens_per_fill": "limit_request_per_second", **</color>
+                <color GREEN>**"fill_interval": "1 second"**</color>
+            <color GREEN>**}",**</color>
+            <color GREEN>**"filter_enabled": "100% (all requests)",**</color>
+            <color GREEN>**"filter_enforced": "100% (all requests)",**</color>
+            <color GREEN>**"request_headers_to_add_when_not_enforced": [X-RateLimit-NotEnforced],**</color>
+            <color GREEN>**"response_headers_to_add": [X-RateLimit-Applied],**</color>
+            <color GREEN>**} **</color>
+        end note
+
+        VirtualHostBuilder <--> InMemRepo : get related routes
+        VirtualHostBuilder -> RouteBuilder : BuildRoutes(routes []*domain.Route)
+        note right RouteBuilder
+            <color GREEN>**If route has own rate limit, then it will have**</color>
+            <color GREEN>**a higher priority than that of the virtual host**</color>
+            <color GREEN>**and will be overridden it**</color>
+        end note
+        VirtualHostBuilder -> VirtualHostBuilder : fill virtual host with envoy routes
+
+        note right VirtualHostBuilder
+            Further build of virtual host...
+        end note
+
+    end
+
+EnvoyConfigBuilder <-- VirtualHostBuilder : virtual hosts, error
+deactivate VirtualHostBuilder
+
+@enduml

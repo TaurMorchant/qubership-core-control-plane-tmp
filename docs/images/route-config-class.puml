@@ -1,0 +1,71 @@
+@startuml
+
+class HeaderDefinition << (C,Aquamarine) >> {
+    + Name string
+    + Value string
+}
+
+class HeaderMatcher << (C,Aquamarine) >> {
+    + Name string
+    + ExactMatch string
+    + SafeRegexMatch string
+    + RangeMatch RangeMatch
+    + PresentMatch Bool
+    + PrefixMatch string
+    + SuffixMatch string
+    + InvertMatch bool
+}
+
+class RangeMatch << (C,Aquamarine) >> {
+    + Start Int
+    + End Int
+}
+
+class Route << (C,Aquamarine) >> {
+    + Destination RouteDestination
+    + Rules []Rule
+}
+
+class RouteConfiguration << (C,Aquamarine) >> {
+    + Version string
+    + Routes []Route
+}
+
+class RouteDestination << (C,Aquamarine) >> {
+    + Cluster string
+    + Endpoint string
+}
+
+class RouteMatch << (C,Aquamarine) >> {
+    + Prefix string
+    + HeaderMatchers []HeaderMatcher
+
+}
+class Rule << (C,Aquamarine) >> {
+    + Match RouteMatch
+    + PrefixRewrite string
+    + AddHeaders []HeaderDefinition
+    + RemoveHeaders []string
+    + Timeout Long
+    + <color GREEN>**LocalRateLimit RateLimit**</color>
+}
+
+class VirtualService << (C,Aquamarine) >> {
+    + Name string
+    + Hosts []string
+    + AddHeaders []HeaderDefinition
+    + RemoveHeaders []string
+    + RouteConfiguration RouteConfiguration
+}
+
+Route *-- RouteDestination
+VirtualService *---- HeaderDefinition
+VirtualService *- RouteConfiguration
+RouteConfiguration *-- Route
+Route *- Rule
+Rule *-- RouteMatch
+Rule *- HeaderDefinition
+RouteMatch *-- HeaderMatcher
+HeaderMatcher *- RangeMatch
+
+@enduml

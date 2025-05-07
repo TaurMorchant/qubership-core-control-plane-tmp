@@ -1,0 +1,573 @@
+= Control Plane API
+
+
+[[_overview]]
+== Overview
+API includes registration of routes with backward compatibility with spring-cloud-gateway.
+
+
+=== Version information
+[%hardbreaks]
+__Version__ : 1.0
+
+
+=== URI scheme
+[%hardbreaks]
+__Host__ : localhost
+__BasePath__ : /
+
+
+=== Tags
+
+* Migration management API : Service Controller
+* Route management - Version 1 : Route Controller
+
+
+
+
+[[_paths]]
+== Resources
+
+[[_migration_management_api_resource]]
+=== Migration Management API
+Service Controller
+
+
+[[_getmigrationdoneflagusingget_1]]
+==== Get migration flag
+....
+GET /api/v1/control-plane/system/migration-done
+....
+
+
+===== Description
+Get value of migration flag.
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_responseentity,ResponseEntity>>
+|===
+
+
+===== Produces
+
+* `\*/*`
+* `text/plain`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v1/control-plane/system/migration-done
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source,json]
+----
+{
+  "body" : "object",
+  "statusCode" : "string",
+  "statusCodeValue" : 0
+}
+----
+
+
+[[_setmigrationdoneflagusingpost_1]]
+==== Set migration flag
+....
+POST /api/v1/control-plane/system/migration-done/{value}
+....
+
+
+===== Description
+Set is done flag. If true migration job will be stopped.
+
+
+===== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**value** +
+__required__|value|enum (true, false)
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_responseentity,ResponseEntity>>
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `\*/*`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v1/control-plane/system/migration-done/true
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source,json]
+----
+{
+  "body" : "object",
+  "statusCode" : "string",
+  "statusCodeValue" : 0
+}
+----
+
+
+[[_route_management_version_1_resource]]
+=== Route Management - Version 1
+Route Controller
+
+
+[[_getclustersusingget_1]]
+==== Get All clusters
+....
+GET /api/v1/routes/clusters
+....
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_responseentity,ResponseEntity>>
+|===
+
+
+===== Produces
+
+* `\*/*`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v1/routes/clusters
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source,json]
+----
+{
+  "body" : "object",
+  "statusCode" : "string",
+  "statusCodeValue" : 0
+}
+----
+
+
+[[_deleteclusterusingdelete_1]]
+==== Delete cluster by id
+....
+DELETE /api/v1/routes/clusters/{id}
+....
+
+
+===== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**id** +
+__optional__|Cluster identifier.|integer (int64)
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_responseentity,ResponseEntity>>
+|===
+
+
+===== Produces
+
+* `\*/*`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v1/routes/clusters/service||service||8080
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source,json]
+----
+{
+  "body" : "object",
+  "statusCode" : "string",
+  "statusCodeValue" : 0
+}
+----
+
+
+[[_getrouteconfigsusingget_1]]
+==== Get All routes configurations
+....
+GET /api/v1/routes/route-configs
+....
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_responseentity,ResponseEntity>>
+|===
+
+
+===== Produces
+
+* `\*/*`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v1/routes/route-configs
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source,json]
+----
+{
+  "body" : "object",
+  "statusCode" : "string",
+  "statusCodeValue" : 0
+}
+----
+
+
+[[_getnodegroupsusingget_1]]
+==== Get all envoy node-groups
+....
+GET /api/v1/routes/node-groups
+....
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_responseentity,ResponseEntity>>
+|===
+
+
+===== Produces
+
+* `\*/*`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v1/routes/node-groups
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source,json]
+----
+{
+  "body" : "object",
+  "statusCode" : "string",
+  "statusCodeValue" : 0
+}
+----
+
+[[_getlistenersusingget_1]]
+==== Get all listeners
+....
+GET /api/v1/routes/listeners
+....
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_responseentity,ResponseEntity>>
+|===
+
+
+===== Produces
+
+* `\*/*`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v1/routes/listeners
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source,json]
+----
+{
+  "body" : "object",
+  "statusCode" : "string",
+  "statusCodeValue" : 0
+}
+----
+
+
+[[_createroutesusingpost_2]]
+==== Create/Update routes for node-group
+....
+POST /api/v1/routes/{nodeGroup}
+....
+
+
+===== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**nodeGroup** +
+__optional__|Name of envoy node-group|string
+|===
+
+
+===== Body parameter
+Description of routes to be inserted
+
+[%hardbreaks]
+__Name__ : request
+__Flags__ : optional
+__Type__ : <<_routeentityrequest,RouteEntityRequest>>
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_3d8955fce819b84007d9e7fb0db975a3,DeferredResult«ResponseEntity«object»»>>
+|**400**|BAD REQUEST : Array of routes is empty|
+|===
+
+
+===== Consumes
+
+* `application/json`
+
+
+===== Produces
+
+* `\*/*`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v1/routes/public-gateway-service
+----
+
+
+====== Request body
+[source,json]
+----
+{
+  "allowed" : true,
+  "microserviceUrl" : "string",
+  "routes" : [ {
+    "from" : "string",
+    "timeout" : 0,
+    "to" : "string",
+    "namespace" : "string"
+  } ]
+}
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source,json]
+----
+{
+  "result" : "object",
+  "setOrExpired" : true
+}
+----
+
+
+[[_deleterouteusingdelete_3]]
+==== Delete routes by node-group
+....
+DELETE /api/v1/routes/{nodeGroup}
+....
+
+
+===== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**nodeGroup** +
+__required__|Name of envoy node-group|string
+|**Query**|**from** +
+__optional__|Which path handle to route|string
+|**Query**|**namespace** +
+__optional__|Cloud env namespace. Openshift - project name, K8s - namespace.|string
+|===
+
+
+===== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_responseentity,ResponseEntity>>
+|===
+
+
+===== Produces
+
+* `\*/*`
+
+
+===== Example HTTP request
+
+====== Request path
+----
+/api/v1/routes/public-gateway-service
+----
+
+
+===== Example HTTP response
+
+====== Response 200
+[source,json]
+----
+{
+  "body" : "object",
+  "statusCode" : "string",
+  "statusCodeValue" : 0
+}
+----
+
+
+
+
+[[_definitions]]
+== Definitions
+
+[[_3d8955fce819b84007d9e7fb0db975a3]]
+=== DeferredResult«ResponseEntity«object»»
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**result** +
+__optional__|**Example** : `"object"`|object
+|**setOrExpired** +
+__optional__|**Example** : `true`|boolean
+|===
+
+
+[[_responseentity]]
+=== ResponseEntity
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**body** +
+__optional__|**Example** : `"object"`|object
+|**statusCode** +
+__optional__|**Example** : `"string"`|enum (100 CONTINUE, 101 SWITCHING_PROTOCOLS, 102 PROCESSING, 103 CHECKPOINT, 200 OK, 201 CREATED, 202 ACCEPTED, 203 NON_AUTHORITATIVE_INFORMATION, 204 NO_CONTENT, 205 RESET_CONTENT, 206 PARTIAL_CONTENT, 207 MULTI_STATUS, 208 ALREADY_REPORTED, 226 IM_USED, 300 MULTIPLE_CHOICES, 301 MOVED_PERMANENTLY, 302 FOUND, 302 MOVED_TEMPORARILY, 303 SEE_OTHER, 304 NOT_MODIFIED, 305 USE_PROXY, 307 TEMPORARY_REDIRECT, 308 PERMANENT_REDIRECT, 400 BAD_REQUEST, 401 UNAUTHORIZED, 402 PAYMENT_REQUIRED, 403 FORBIDDEN, 404 NOT_FOUND, 405 METHOD_NOT_ALLOWED, 406 NOT_ACCEPTABLE, 407 PROXY_AUTHENTICATION_REQUIRED, 408 REQUEST_TIMEOUT, 409 CONFLICT, 410 GONE, 411 LENGTH_REQUIRED, 412 PRECONDITION_FAILED, 413 PAYLOAD_TOO_LARGE, 413 REQUEST_ENTITY_TOO_LARGE, 414 URI_TOO_LONG, 414 REQUEST_URI_TOO_LONG, 415 UNSUPPORTED_MEDIA_TYPE, 416 REQUESTED_RANGE_NOT_SATISFIABLE, 417 EXPECTATION_FAILED, 418 I_AM_A_TEAPOT, 419 INSUFFICIENT_SPACE_ON_RESOURCE, 420 METHOD_FAILURE, 421 DESTINATION_LOCKED, 422 UNPROCESSABLE_ENTITY, 423 LOCKED, 424 FAILED_DEPENDENCY, 426 UPGRADE_REQUIRED, 428 PRECONDITION_REQUIRED, 429 TOO_MANY_REQUESTS, 431 REQUEST_HEADER_FIELDS_TOO_LARGE, 451 UNAVAILABLE_FOR_LEGAL_REASONS, 500 INTERNAL_SERVER_ERROR, 501 NOT_IMPLEMENTED, 502 BAD_GATEWAY, 503 SERVICE_UNAVAILABLE, 504 GATEWAY_TIMEOUT, 505 HTTP_VERSION_NOT_SUPPORTED, 506 VARIANT_ALSO_NEGOTIATES, 507 INSUFFICIENT_STORAGE, 508 LOOP_DETECTED, 509 BANDWIDTH_LIMIT_EXCEEDED, 510 NOT_EXTENDED, 511 NETWORK_AUTHENTICATION_REQUIRED)
+|**statusCodeValue** +
+__optional__|**Example** : `0`|integer (int32)
+|===
+
+
+[[_routeentityrequest]]
+=== RouteEntityRequest
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**allowed** +
+__optional__|**Example** : `true`|boolean
+|**microserviceUrl** +
+__optional__|**Example** : `"string"`|string
+|**routes** +
+__optional__|**Example** : `[ "<<_routeentry>>" ]`|< <<_routeentry,RouteEntry>> > array
+|===
+
+
+[[_routeentry]]
+=== RouteEntry
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**from** +
+__optional__|**Example** : `"string"`|string
+|**namespace** +
+__optional__|**Example** : `"string"`|string
+|**timeout** +
+__optional__|**Example** : `0`|integer (int64)
+|**to** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+
+
+

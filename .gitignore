@@ -1,0 +1,12 @@
+.idea/**
+**/*.iml
+**/target/*
+**/bin/*
+**/vendor/*
+/pkg/
+/*.sh
+**/*/coverage.out
+.vscode/**
+*.exe
+control-plane/control-plane.code-workspace
+control-plane/.vscode/settings.json
