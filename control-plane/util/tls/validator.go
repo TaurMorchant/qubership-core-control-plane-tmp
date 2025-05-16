@@ -57,7 +57,7 @@ func TryToDecodePemAndParseX509Certificates(pemCerts string) (string, error) {
 	if len(errs) == 0 {
 		return pemCerts, nil
 	} else {
-		return validCerts, fmt.Errorf(strings.Join(errs, "\n"))
+		return validCerts, fmt.Errorf("%s", strings.Join(errs, "\n"))
 	}
 }
 
@@ -125,7 +125,7 @@ func TryToValidateX509PrivateKeyClientCertPair(pemPrivateKey string, pemCerts st
 	}
 	if err := TryToDecodePemAndParseX509PrivateKey(pemPrivateKey); err != nil {
 		errs = append(errs, err.Error())
-		return "", fmt.Errorf(strings.Join(errs, "\n"))
+		return "", fmt.Errorf("%s", strings.Join(errs, "\n"))
 	}
 
 	slicePemCerts := splitPemCerts(validCerts)
@@ -140,6 +140,6 @@ func TryToValidateX509PrivateKeyClientCertPair(pemPrivateKey string, pemCerts st
 	if len(errs) == 0 {
 		return pemCerts, nil
 	} else {
-		return validated, fmt.Errorf(strings.Join(errs, "\n"))
+		return validated, fmt.Errorf("%s", strings.Join(errs, "\n"))
 	}
 }
