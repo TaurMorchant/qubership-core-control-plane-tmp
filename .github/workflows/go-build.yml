@@ -9,6 +9,7 @@ jobs:
   build:
     uses: TaurMorchant/workflows-test/.github/workflows/go-build-with-sonar.yaml@main
     with:
+      go-module-dir: control-plane
       actor: ${{ github.actor }}
       sonar-project-key: ${{ vars.SONAR_PROJECT_KEY }}
     secrets:
